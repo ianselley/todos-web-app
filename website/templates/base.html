@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
     <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <!-- Esto es para poder usar los "Material Icons" de Google -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
     <!-- Esto es para usar el Rubik font de Google -->
@@ -59,15 +59,13 @@
             <div class="items-center md:flex">
                 <div class="flex flex-col md:flex-row md:mx-6">
                     <a class="my-1 text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0"
-                        href="#">Welcome page</a>
+                        href="/welcome-page">Welcome page</a>
                     <a class="my-1 text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0"
-                        href="#">Home</a>
+                        href="/">Home</a>
                     <a class="my-1 text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0"
-                        href="#">Sign Up</a>
+                        href="/sign-up">Sign Up</a>
                     <a class="my-1 text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0"
-                        href="#">Log In </a>
-                    <a class="my-1 text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 md:mx-4 md:my-0"
-                        href="#">About</a>
+                        href="login">Log In </a>
                 </div>
             </div>
         </div>

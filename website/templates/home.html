@@ -11,12 +11,12 @@
             <button type="submit"
                 class="my-6 w-full h-12 bg-green-500 rounded-full text-white font-bold text-xl shadow-lg hover:shadow-xl hover:bg-current-300 transition-all duration-200 ease-in-out">Save</button>
         </form>
-        <div class="">
+        <ul class="">
             {% for note in user.notes %}
-            <div class="ring-black ring-1 m-1 p-4">
+            <li class="ring-black ring-1 m-1 p-4">
                 <div class="flex items-center">
                     <div class="mr-3 flex flex-nowrap content-center">
-                        <a href="/done/{{ note.id }}" class="">
+                        <a href="/done/{{ note.id }}" class="mr-1">
                             <!-- onclick="location.href=this.href+window.scrollY;return false;" -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -52,9 +52,9 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </li>
             {% endfor %}
-        </div>
+        </ul>
     </div>
 </div>
 <script>
