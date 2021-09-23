@@ -15,3 +15,8 @@ input {
 .complete {
   @apply line-through text-gray-400;
 }
+
+footer span {
+  font-family: "Montserrat";
+  @apply ml-3;
+}

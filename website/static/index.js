@@ -1,23 +1,20 @@
 function edit_note(id_) {
   $(`#text-plus-logo${id_}`).replaceWith(`
-    <form action="/edit_note/${id_}?scroll=${window.scrollY}" method="post">
-        <div class="ml-3 flex items-center">
-            <div class="">
-                <input class="w-full" name="content${id_}" autofocus
-                placeholder="Note" value="${$("#text" + id_)
+    <div class="ml-3 w-full">
+        <form class="grid grid-cols-auto-min" method="post"
+        action="/edit_note/${id_}?scroll=${window.scrollY}">
+                <input value="${$("#text" + id_)
                   .text()
-                  .trim()}">
-            </div>
-            <div class="">
-                <button type="submit" class="ml-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
-                    class="bi bi-check2" viewBox="0 0 16 16">
-                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </form>`);
+                  .trim()}" placeholder="Note" name="content${id_}" autofocus>
+            <button type="submit" class="ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
+                class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+    `);
   $(`name=[content${id_}]`).focus();
 }
 
@@ -34,7 +31,7 @@ function delete_note(note_id) {
   });
 }
 
-// Seccion para ver/no ver la contraseña
+// Sección para ver/no ver la contraseña
 
 // const togglePassword = document.querySelector("#toggle-pwd");
 // const password = document.querySelector("#password");

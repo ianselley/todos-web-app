@@ -3,12 +3,19 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   purge: ["./website/**/*.{js,html}"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class' or 'false'
   theme: {
     extend: {
       transitionDuration: {
         400: "400ms",
       },
+      gridTemplateColumns: {
+        "auto-min": "auto min-content",
+      },
+    },
+    fontFamily: {
+      rubik: "Rubik",
+      montserrat: "Montserrat",
     },
     colors: {
       transparent: "transparent",
@@ -37,9 +44,6 @@ module.exports = {
       gray: colors.gray,
       coolGray: colors.coolGray,
       blueGray: colors.blueGray,
-    },
-    fontFamily: {
-      sans: ["Rubik"],
     },
   },
   variants: {

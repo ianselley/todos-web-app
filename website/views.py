@@ -50,6 +50,6 @@ def edit_note(note_id):
     return redirect(url_for('views.home'))
 
 
-@views.route('/welcome-page')
-def welcome_page():
-    return render_template('welcome_page.html', user=current_user)
+@views.route('/manual')
+def manual():
+    return render_template('manual.html', user=current_user)
