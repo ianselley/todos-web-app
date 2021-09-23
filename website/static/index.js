@@ -18,9 +18,13 @@ function edit_note(id_) {
   $(`name=[content${id_}]`).focus();
 }
 
-window.setTimeout(function () {
-  $(".alert").fadeTo(500, 0);
-}, 3500);
+// window.setTimeout(function () {
+//   $(".alert").fadeTo(500, 0);
+// }, 3500);
+
+function delete_alert() {
+  $("#alert").remove();
+}
 
 function delete_note(note_id) {
   fetch("/delete-note", {

@@ -11,12 +11,12 @@
             <button type="submit"
                 class="my-6 w-full h-12 bg-green-500 rounded-full text-white font-bold text-xl shadow-lg hover:shadow-xl hover:bg-current-300 transition-all duration-200 ease-in-out">Save</button>
         </form>
-        <ul class="">
+        <ul class="divide-y divide-gray-400 divide-opacity-50">
             {% for note in user.notes %}
-            <li class="ring-black ring-1 m-1 p-4">
+            <li class="m-1 p-4">
                 <div class="flex items-center">
                     <div class="mr-3 flex flex-nowrap content-center">
-                        <a href="/done/{{ note.id }}" class="mr-1">
+                        <a href="/done/{{ note.id }}" class="mr-2">
                             <!-- onclick="location.href=this.href+window.scrollY;return false;" -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -58,6 +58,6 @@
     </div>
 </div>
 <script>
-    window.scrollTo(0, '{{ scroll }}'); // Sin las comillas simples sale error; de todas formas, de ninguna manera funciona
+    window.scrollTo(0, '{{ scroll }}'); // Sin las comillas simples sale error; de todas formas, de ninguna manera funciona xd
 </script>
 {% endblock content %}

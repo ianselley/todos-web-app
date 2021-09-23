@@ -17,10 +17,10 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
 
         if user:
-            flash('Email already exists', category='danger')
+            flash('Email already exists')
 
         elif password != password_confirm:
-            flash('Both passwords must be the same', category='danger')
+            flash('Both passwords must be the same')
 
         else:
             # Se utiliza la función hash "sha256" para no almacenar la contraseña tal cual, sino gurardar el hash
@@ -32,7 +32,7 @@ def sign_up():
 
             if request.form.get('direct-login'):
                 login_user(new_user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.my_notes'))
 
             return redirect(url_for('auth.login'))
 
@@ -49,11 +49,11 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.my_notes'))
             else:
-                flash('Invalid password, try again.', category='danger')
+                flash('Invalid password, try again.')
         else:
-            flash('Email does not exist, try again.', category='danger')
+            flash('Email does not exist, try again.')
 
     return render_template('login.html', user=current_user)
 
@@ -62,6 +62,6 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('logged out successfully', category='success')
+    flash('Logged out successfully', category='success')
     db.session.close()
     return redirect(url_for('auth.login'))

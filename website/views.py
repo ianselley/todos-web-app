@@ -9,14 +9,14 @@ views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
-def home():
+def my_notes():
     if request.method == 'POST':
         content = request.form['note_content']
         new_note = Note(content=content, user_id=current_user.id)
         db.session.add(new_note)
         db.session.commit()
         flash('Note added successfully', category='success')
-    return render_template('home.html', user=current_user)
+    return render_template('my_notes.html', user=current_user)
 
 
 @views.route('/delete-note/<note_id>', methods=['GET'])
@@ -25,7 +25,7 @@ def delete_note(note_id):
     note = Note.query.filter_by(id=note_id).first()
     db.session.delete(note)
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.my_notes'))
 
 
 @views.route('/done/<note_id>', methods=['GET'])
@@ -34,7 +34,7 @@ def check_note(note_id):
     note = Note.query.filter_by(id=note_id).first()
     note.complete = not note.complete
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.my_notes'))
 
 
 @views.route('/edit_note/<note_id>', methods=['POST'])
@@ -47,7 +47,7 @@ def edit_note(note_id):
     db.session.commit()
     if change:
         flash('Note edited successfully', category='success')
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.my_notes'))
 
 
 @views.route('/manual')

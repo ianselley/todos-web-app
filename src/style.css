@@ -20,3 +20,16 @@ footer span {
   font-family: "Montserrat";
   @apply ml-3;
 }
+
+.alert {
+  /* flex items-center justify-center */
+  @apply border-t border-b h-20  bg-opacity-25 bg-red-400 border-red-600;
+}
+
+.alert-success {
+  @apply bg-green-400 border-green-600 bg-opacity-25;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
