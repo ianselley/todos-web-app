@@ -26,6 +26,10 @@ function delete_alert() {
   $("#alert").remove();
 }
 
+function toggle_nav_items() {
+  $("#nav-items").toggleClass("hidden");
+}
+
 function delete_note(note_id) {
   fetch("/delete-note", {
     method: "POST",
