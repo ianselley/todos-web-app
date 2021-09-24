@@ -16,6 +16,7 @@ module.exports = {
     fontFamily: {
       rubik: "Rubik",
       montserrat: "Montserrat",
+      pacifico: "Pacifico",
     },
     colors: {
       transparent: "transparent",
