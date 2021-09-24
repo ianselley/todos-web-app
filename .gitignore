@@ -3,4 +3,4 @@ node_modules
 venv
 javier_martos.jpg
 test.html
-website/database.db
+database.db
