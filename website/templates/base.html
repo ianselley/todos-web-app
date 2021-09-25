@@ -75,10 +75,10 @@
         {% if messages %}
         {% for category, message in messages %}
         <div id="alert" class="alert alert-{{ category }} grid grid-cols-auto-min">
-            <div class="flex-center">{{ message }}</div>
-            <div class="flex-center">
+            <div class="text-center leading-16">{{ message }}</div>
+            <div class="relative w-0 h-0">
                 <button onclick="delete_alert()"
-                    class="mr-8 h-4 flex-center hover:scale-150 transition duration-200 ease-linear">&#10005;</button>
+                    class="mr-8 h-4 absolute top-5 right-4 hover:scale-150 transform hover:-translate-y-0.5 transition duration-200 ease-linear">&#10005;</button>
             </div>
         </div>
         {% endfor %}
