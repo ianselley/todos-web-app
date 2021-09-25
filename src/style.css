@@ -20,7 +20,7 @@
 }
 
 .alert-warning {
-  @apply bg-yellow-400 border-yellow-600 bg-opacity-25;
+  @apply bg-yellow-400 border-yellow-600 bg-opacity-25 text-rose-900 font-medium;
 }
 
 .card {
