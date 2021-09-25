@@ -4,39 +4,33 @@
 
 {% block content %}
 <div class="flex justify-center">
-    <div class="card w-2/3">
+    <div class="card w-1/2">
         <form method="POST">
-            <h2 class="text-center text-2xl font-medium">Log into your account (not finished)</h2>
+            <h2 class="text-center text-2xl font-medium">Log into your account</h2>
             <div class="">
                 <label for="email">Email:</label> <!-- el for="email" hace referencia al id="email" de abajo -->
-                <div class="">
-                    <div class="">
-                        <span id="email-prepend">
-                            <i class="material-icons">mail_outline</i>
-                        </span>
-                    </div>
-                    <input type="email" class="grid-item input-text" id="email" name="email" autocapitalize="none"
+                <div class="logo-input">
+                    <span id="email-prepend" class="logo">
+                        <i class="material-icons">mail_outline</i>
+                    </span>
+                    <input type="email" class="form" id="email" name="email" autocapitalize="none"
                         placeholder="Write your email" autofocus required autocomplete="email">
                 </div>
             </div>
             <div class="">
                 <label for="password">Password:</label>
-                <div class="">
-                    <div class="">
-                        <span>
-                            <i class="material-icons">password</i>
-                        </span>
-                    </div>
-                    <div class="">
-                        <input type="password" class="" id="password" name="password" autocapitalize="none"
-                            placeholder="Write your password" required autocomplete="current-password">
-                        <span toggle="#password" class="fa fa-fw fa-eye field-icon" id="toggle-pwd"></span>
-                    </div>
+                <div class="logo-input">
+                    <span class="logo">
+                        <i class="material-icons">password</i>
+                    </span>
+                    <input type="password" class="form" id="password" name="password" autocapitalize="none"
+                        placeholder="Write your password" required autocomplete="current-password">
+                    <!-- <span toggle="#password" class="fa fa-fw fa-eye field-icon" id="toggle-pwd"></span> -->
                 </div>
             </div>
             <br>
             <div>
-                <button class="" type="submit">LOG IN</button>
+                <button class="btn-form" type="submit">LOG IN</button>
             </div>
         </form>
     </div>
