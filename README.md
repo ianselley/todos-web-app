@@ -49,20 +49,20 @@ In the terminal/command prompt write the following commands
 
 1. Clone the repo
 
-```sh
+```
 git clone https://github.com/ianselley/todos-web-app.git
 ```
 
 2. cd into that directory named as the repo
 
-```sh
+```
 cd todos-web-app
 ```
 
 3. Create a virtual environment (the last "venv" is the name of the
    virtual env, you can call it whatever you like)
 
-```sh
+```
 python -m venv venv
 ```
 
@@ -76,19 +76,19 @@ python -m venv venv
 
 - In Linux/Mac:
 
-```sh
+```
 source venv/bin/activate
 ```
 
 5. Install python modules
 
-```sh
+```
 pip install -r requirements.txt
 ```
 
 6. Run main.py
 
-```sh
+```
 python main.py
 ```
 
