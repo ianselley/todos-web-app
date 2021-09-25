@@ -8,7 +8,7 @@ from datetime import datetime
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    email = Column(String(150), unique=True)
+    username = Column(String(150), unique=True)
     password = Column(String(150))
     # La "N" es mayúscula por que hace referencia al nombre de la clase en Python
     notes = db.relationship('Note')

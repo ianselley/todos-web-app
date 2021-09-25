@@ -11,20 +11,20 @@ auth = Blueprint('auth', __name__)
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
-        email = request.form['email']
+        username = request.form['username']
         password = request.form['password']
         password_confirm = request.form['password-confirm']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
 
         if user:
-            flash('Email already exists')
+            flash('username already exists')
 
         elif password != password_confirm:
             flash('Both passwords must be the same')
 
         else:
             # Se utiliza la función hash "sha256" para no almacenar la contraseña tal cual, sino gurardar el hash
-            new_user = User(email=email, password=generate_password_hash(
+            new_user = User(username=username, password=generate_password_hash(
                 password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
@@ -44,9 +44,9 @@ def sign_up():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
@@ -56,7 +56,7 @@ def login():
             else:
                 flash('Invalid password, try again.')
         else:
-            flash('Email does not exist, try again.')
+            flash('username does not exist, try again.')
 
     return render_template('login.html', user=current_user)
 
