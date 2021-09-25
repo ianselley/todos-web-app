@@ -89,7 +89,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Now you just have to go to http://localhost:5000 and you are in the website
+Now you just have to go to http://localhost:5000/sign-up and you are in the website
 
 <!-- TECH STACK -->
 
