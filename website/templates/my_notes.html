@@ -5,11 +5,10 @@
 {% block content %}
 <h1 class="text-center text-6xl font-medium font-pacifico">TO-DO's</h1>
 <div class="flex justify-center">
-    <div class="w-2/3 card p-6 mt-12 mb-48">
+    <div class="w-2/3 card">
         <form class="" method="POST">
             <input class="w-full" type="text" name="note_content" placeholder="Notes" autocomplete="off" autofocus>
-            <button type="submit"
-                class="my-6 w-full h-12 bg-green-500 rounded-full text-white font-bold text-xl shadow-lg hover:shadow-xl hover:bg-current-300 transition-all duration-200 ease-in-out">Save</button>
+            <button type="submit" class="my-6 w-full btn-form">Save</button>
         </form>
         <ul class="divide-y divide-gray-400 divide-opacity-50">
             {% for note in user.notes %}

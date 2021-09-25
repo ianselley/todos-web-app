@@ -11,6 +11,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "auto-min": "auto min-content",
+        "min-auto": "min-content auto",
       },
       lineHeight: {
         16: "4rem",

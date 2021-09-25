@@ -5,50 +5,46 @@
 
 {% block content %}
 <div class="flex justify-center">
-    <div class="card w-2/3">
+    <div class="card w-1/2">
         <form method="post">
-            <h2 class="text-center text-2xl font-medium">Sign up and start writing TO-DO's (not finished)</h2>
+            <h2 class="text-center text-2xl font-medium">Sign up and start writing TO-DO's</h2>
             <div class="">
                 <label for="email">Email:</label> <!-- el for="email" hace referencia al id="email" de abajo -->
-                <div class="">
-                    <div class="">
-                        <span id="email-prepend">
-                            <i class="material-icons">mail_outline</i>
-                        </span>
-                    </div>
-                    <input type="email" class="" id="email" name="email" autocapitalize="none"
+                <div class="logo-input">
+                    <span id="email-prepend" class="logo">
+                        <i class="material-icons">mail_outline</i>
+                    </span>
+                    <input type="email" class="form" id="email" name="email" autocapitalize="none"
                         placeholder="Write your email" autofocus required minlength="5" autocomplete="email">
                 </div>
             </div>
             <div class="">
                 <label for="password">Password:</label>
-                <div class="">
-                    <div class="">
-                        <span>
-                            <i class="material-icons">password</i>
-                        </span>
-                    </div>
-                    <input type="password" class="" id="password" name="password" autocapitalize="none"
+                <div class="logo-input">
+                    <span class="logo">
+                        <i class="material-icons">password</i>
+                    </span>
+                    <input type="password" class="form" id="password" name="password" autocapitalize="none"
                         placeholder="Write a password" required minlength=8" autocomplete="new-password">
                 </div>
             </div>
             <div class="">
                 <label for="password-confirm">Repeat password:</label>
-                <div class="">
-                    <div class="">
-                        <span>
-                            <i class="material-icons">password</i>
-                        </span>
-                    </div>
-                    <input type="password" class="" id="password-confirm" name="password-confirm" autocapitalize="none"
-                        placeholder="Repeat your password" minlength=8" required autocomplete="new-password">
+                <div class="logo-input">
+                    <span class="logo">
+                        <i class="material-icons">password</i>
+                    </span>
+                    <input type="password" class="form" id="password-confirm" name="password-confirm"
+                        autocapitalize="none" placeholder="Repeat your password" minlength=8" required
+                        autocomplete="new-password">
                 </div>
             </div>
-            <input type="checkbox" checked id="direct-login" name="direct-login">
-            <label for="direct-login">Log in automatically</label>
-            <br>
             <div>
-                <button class="" type="submit">SIGN UP</button>
+                <input type="checkbox" checked id="direct-login" name="direct-login">
+                <label for="direct-login">Log in automatically</label>
+            </div>
+            <div>
+                <button class="btn-form" type="submit">SIGN UP</button>
             </div>
         </form>
     </div>
