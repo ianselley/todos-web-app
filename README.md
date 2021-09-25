@@ -20,6 +20,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#accessing-website">Accessing Website</a></li>
     <li><a href="#tech-stack">Tech Stack</a></li>
   </ol>
 </details>
@@ -43,6 +44,8 @@ You need to have installed the following:
 - pip
 
 ### Installation
+
+In the terminal/command prompt write the following commands
 
 1. Clone the repo
 
@@ -89,7 +92,11 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Now if you want to access the website from the same device where you just run theese commands you just have to go to http://localhost:5000/sign-up
+<!-- ACCESSING WEBSITE -->
+
+## Accessing Website
+
+If you want to access the website from the same device where you just run the above commands you just have to go to http://localhost:5000/sign-up
 and you are in the website. 
 
 But you can also access it from any other device that is in the same network as the device runnig the app, to do so
