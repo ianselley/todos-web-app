@@ -89,7 +89,12 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Now you just have to go to http://localhost:5000/sign-up and you are in the website
+Now if you want to access the website from the same device where you just run theese commands you just have to go to http://localhost:5000/sign-up
+and you are in the website. 
+
+But you can also access it from any other device that is in the same network as the device runnig the app, to do so
+you have to figure out what is [your local IP address](https://www.whatismybrowser.com/detect/what-is-my-local-ip-address). Once you know that,
+you can access it through: http://local-ip-here:5000/sign-up
 
 <!-- TECH STACK -->
 
