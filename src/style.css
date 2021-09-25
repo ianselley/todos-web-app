@@ -19,6 +19,10 @@
   @apply bg-green-400 border-green-600 bg-opacity-25;
 }
 
+.alert-warning {
+  @apply bg-yellow-400 border-yellow-600 bg-opacity-25;
+}
+
 .card {
   @apply bg-warmGray-50 rounded-xl shadow-xl;
 }

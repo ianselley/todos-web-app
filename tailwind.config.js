@@ -12,6 +12,9 @@ module.exports = {
       gridTemplateColumns: {
         "auto-min": "auto min-content",
       },
+      lineHeight: {
+        16: "4rem",
+      },
     },
     fontFamily: {
       rubik: "Rubik",

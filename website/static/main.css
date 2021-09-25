@@ -622,12 +622,28 @@ video {
   position: static;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
 .sticky {
   position: sticky;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.top-5 {
+  top: 1.25rem;
+}
+
+.right-4 {
+  right: 1rem;
 }
 
 .m-1 {
@@ -704,6 +720,10 @@ video {
   height: 1.5rem;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .h-4 {
   height: 1rem;
 }
@@ -726,6 +746,10 @@ video {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-0 {
+  width: 0px;
 }
 
 .w-2\/3 {
@@ -904,6 +928,10 @@ video {
   font-weight: 700;
 }
 
+.leading-16 {
+  line-height: 4rem;
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgba(113, 113, 122, var(--tw-text-opacity));
@@ -1011,6 +1039,14 @@ video {
   --tw-bg-opacity: 0.25;
 }
 
+.alert-warning {
+  --tw-border-opacity: 1;
+  border-color: rgba(202, 138, 4, var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(250, 204, 21, var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.25;
+}
+
 .card {
   border-radius: 0.75rem;
   --tw-bg-opacity: 1;
@@ -1059,6 +1095,16 @@ input:focus {
 footer span {
   font-family: "Montserrat";
   margin-left: 0.75rem;
+}
+
+.hover\:-translate-y-0\.5:hover {
+  --tw-translate-y: -0.125rem;
+  transform: var(--tw-transform);
+}
+
+.hover\:-translate-y-0:hover {
+  --tw-translate-y: 0px;
+  transform: var(--tw-transform);
 }
 
 .hover\:scale-150:hover {
