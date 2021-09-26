@@ -17,7 +17,7 @@ def sign_up():
         user = User.query.filter_by(username=username).first()
 
         if user:
-            flash('username already exists')
+            flash('Username already exists')
 
         elif password != password_confirm:
             flash('Both passwords must be the same')
@@ -56,7 +56,7 @@ def login():
             else:
                 flash('Invalid password, try again.')
         else:
-            flash('username does not exist, try again.')
+            flash('Username does not exist, try again.')
 
     return render_template('login.html', user=current_user)
 
