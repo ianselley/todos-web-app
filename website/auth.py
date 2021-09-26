@@ -17,7 +17,7 @@ def sign_up():
         user = User.query.filter_by(username=username).first()
 
         if user:
-            flash('username already exists')
+            flash('Username already exists')
 
         elif password != password_confirm:
             flash('Both passwords must be the same')
@@ -29,7 +29,7 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully', category='success')
-            flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. The database is public on github', category='warning')
+            # flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. The database is public on github', category='warning')
 
             if request.form.get('direct-login'):
                 login_user(new_user, remember=True)
@@ -37,7 +37,7 @@ def sign_up():
 
             return redirect(url_for('auth.login'))
 
-    flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. Although the passwords are hashed, the database is public on github', category='warning')
+    # flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. Although the passwords are hashed, the database is public on github', category='warning')
     return render_template('sign_up.html', user=current_user)
 
 
@@ -50,13 +50,13 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
-                flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. The database is public on github', category='warning')
+                # flash('WARNING! DO NOT INTRODUCE ANY SENSITIVE INFORMATION. The database is public on github', category='warning')
                 login_user(user, remember=True)
                 return redirect(url_for('views.my_notes'))
             else:
                 flash('Invalid password, try again.')
         else:
-            flash('username does not exist, try again.')
+            flash('Username does not exist, try again.')
 
     return render_template('login.html', user=current_user)
 

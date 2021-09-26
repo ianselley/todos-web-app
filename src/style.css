@@ -10,6 +10,10 @@
   }
 }
 
+nav img {
+  @apply w-36 h-auto;
+}
+
 #nav-items a,
 #nav-items button {
   @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
@@ -70,5 +74,5 @@ input.form {
 
 footer span {
   font-family: "Montserrat";
-  @apply ml-3;
+  @apply ml-3 hidden md:inline;
 }
