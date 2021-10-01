@@ -23,8 +23,9 @@ def my_notes():
 @login_required
 def delete_note(note_id):
     note = Note.query.filter_by(id=note_id).first()
-    db.session.delete(note)
-    db.session.commit()
+    if note:
+        db.session.delete(note)
+        db.session.commit()
     return redirect(url_for('views.my_notes'))
 
 
@@ -32,8 +33,11 @@ def delete_note(note_id):
 @login_required
 def check_note(note_id):
     note = Note.query.filter_by(id=note_id).first()
-    note.complete = not note.complete
-    db.session.commit()
+    if note:
+        note.complete = not note.complete
+        db.session.commit()
+    else:
+        flash('That note does not exist any more', category='error')
     return redirect(url_for('views.my_notes'))
 
 
@@ -41,12 +45,15 @@ def check_note(note_id):
 @login_required
 def edit_note(note_id):
     note = Note.query.filter_by(id=note_id).first()
-    new_content = request.form[f'content{note_id}']
-    change = False if note.content.strip() == new_content.strip() else True
-    note.content = new_content
-    db.session.commit()
-    if change:
-        flash('Note edited successfully', category='success')
+    if note:
+        new_content = request.form[f'content{note_id}']
+        change = False if note.content.strip() == new_content.strip() else True
+        note.content = new_content
+        db.session.commit()
+        if change:
+            flash('Note edited successfully', category='success')
+    else:
+        flash('That note does not exist any more', category='error')
     return redirect(url_for('views.my_notes'))
 
 

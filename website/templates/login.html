@@ -3,8 +3,9 @@
 {% block title %} {{ super() }} {% endblock title %}
 
 {% block content %}
+
 <div class="flex justify-center">
-    <div class="sm:card md:w-">
+    <div class="no-card sm:card">
         <form method="POST">
             <h2 class="text-center text-2xl font-medium">Log into your account</h2>
             <div class="">
@@ -29,11 +30,11 @@
                     <!-- <span toggle="#password" class="fa fa-fw fa-eye field-icon" id="toggle-pwd"></span> -->
                 </div>
             </div>
-            <br>
             <div>
-                <button class="mb-48 sm:mb-0 btn-form" type="submit">LOG IN</button>
+                <button class="mt-4 btn-form" type="submit">LOG IN</button>
             </div>
         </form>
     </div>
 </div>
+
 {% endblock content %}

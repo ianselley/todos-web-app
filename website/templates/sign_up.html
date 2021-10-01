@@ -2,11 +2,11 @@
 
 {% block title %} {{ super() }} {% endblock title %}
 
-
 {% block content %}
+
 <div class="flex justify-center">
-    <div class="sm:card md:w-72">
-        <form method="post">
+    <div class="no-card sm:card">
+        <form method="POST">
             <h2 class="text-center text-2xl font-medium">Sign up and start writing TO-DO's</h2>
             <div class="">
                 <label for="username">Username:</label>
@@ -40,8 +40,8 @@
                         autocomplete="new-password">
                 </div>
             </div>
-            <div>
-                <input type="checkbox" checked id="direct-login" name="direct-login">
+            <div class="flex items-center">
+                <input class="mr-1" type="checkbox" checked id="direct-login" name="direct-login">
                 <label for="direct-login">Log in automatically</label>
             </div>
             <div>
@@ -50,4 +50,5 @@
         </form>
     </div>
 </div>
+
 {% endblock content %}

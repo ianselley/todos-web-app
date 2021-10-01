@@ -1,7 +1,5 @@
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
 
 @layer base {
@@ -16,14 +14,14 @@ nav img {
 
 #nav-items a,
 #nav-items button {
-  @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
+  @apply py-2 block w-full text-center sm:p-0 sm:mx-4 text-gray-700 hover:text-indigo-500;
   @apply dark:text-gray-200 dark:hover:text-indigo-400;
   white-space: nowrap;
 }
 
 .alert {
   /* flex items-center justify-center */
-  @apply border-t border-b h-16  bg-opacity-25 bg-red-400 border-red-600 text-red-900;
+  @apply border-t border-b  bg-opacity-25 bg-red-400 border-red-600 text-red-900;
 }
 
 .alert-success {
@@ -36,7 +34,13 @@ nav img {
 
 @responsive {
   .card {
-    @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-12 mb-48;
+    @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-12 mb-48 w-120;
+  }
+}
+
+@responsive {
+  .no-card {
+    @apply mb-48 w-72;
   }
 }
 
@@ -59,7 +63,7 @@ input {
 }
 
 input:not(.form) {
-  @apply ring-gray-300 ring-1 shadow-md rounded-md;
+  @apply ring-gray-300 ring-1 shadow-md rounded-md focus:ring-blue-300 focus:ring-2;
 }
 
 input.form {
@@ -70,13 +74,21 @@ input.form {
   /* Añadir el ojo para las contraseñas */
 }
 
+form ~ ul {
+  @apply pt-6;
+}
+
+/* li:last-child:not(:first-child) {
+  @apply mb-4;
+} */
+
 .complete {
   @apply line-through text-gray-400;
 }
 
 .btn-form {
   @apply h-12 w-full bg-green-500 rounded-full text-white font-bold text-xl shadow-lg;
-  @apply hover:shadow-xl transition-all duration-200 ease-in-out;
+  @apply hover:shadow-xl transition-all duration-200 ease-in-out; /* mb-48 sm:mb-0  */
 }
 
 footer span {
