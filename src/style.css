@@ -34,11 +34,14 @@ nav img {
   @apply bg-yellow-400 border-yellow-600 bg-opacity-25 text-rose-900 font-medium;
 }
 
-.card {
-  @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-12 mb-48;
+@responsive {
+  .card {
+    @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-12 mb-48;
+  }
 }
 
-h2 ~ div:not(:last-child) {
+h2 ~ div:not(:last-child),
+h2 {
   @apply mb-4;
 }
 
@@ -61,6 +64,10 @@ input:not(.form) {
 
 input.form {
   @apply rounded-r-md;
+}
+
+.eye::after {
+  /* Añadir el ojo para las contraseñas */
 }
 
 .complete {
