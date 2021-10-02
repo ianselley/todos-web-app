@@ -2,11 +2,11 @@
 
 {% block title %} {{ super() }} {% endblock title %}
 
-
 {% block content %}
+
 <div class="flex justify-center">
-    <div class="card w-1/2">
-        <form method="post">
+    <div class="no-card sm:card">
+        <form method="POST">
             <h2 class="text-center text-2xl font-medium">Sign up and start writing TO-DO's</h2>
             <div class="">
                 <label for="username">Username:</label>
@@ -25,7 +25,7 @@
                     <span class="logo">
                         <i class="material-icons">password</i>
                     </span>
-                    <input type="password" class="form" id="password" name="password" autocapitalize="none"
+                    <input type="password" class="form eye" id="password" name="password" autocapitalize="none"
                         placeholder="Write a password" required minlength=8" autocomplete="new-password">
                 </div>
             </div>
@@ -35,13 +35,13 @@
                     <span class="logo">
                         <i class="material-icons">password</i>
                     </span>
-                    <input type="password" class="form" id="password-confirm" name="password-confirm"
+                    <input type="password" class="form eye" id="password-confirm" name="password-confirm"
                         autocapitalize="none" placeholder="Repeat your password" minlength=8" required
                         autocomplete="new-password">
                 </div>
             </div>
-            <div>
-                <input type="checkbox" checked id="direct-login" name="direct-login">
+            <div class="flex items-center">
+                <input class="mr-1" type="checkbox" checked id="direct-login" name="direct-login">
                 <label for="direct-login">Log in automatically</label>
             </div>
             <div>
@@ -50,4 +50,5 @@
         </form>
     </div>
 </div>
+
 {% endblock content %}

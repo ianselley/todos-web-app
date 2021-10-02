@@ -34,7 +34,7 @@
         </div>
 
         <!-- Menu button -->
-        <div class="flex md:hidden">
+        <div class="flex sm:hidden">
             <button type="button" aria-label="toggle menu" onclick="toggle_nav_items()"
                 class="text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 focus:text-gray-600 dark:focus:text-gray-400">
                 <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
@@ -46,8 +46,8 @@
         </div>
 
         <!-- Nav Items -->
-        <div id="nav-items" class="hidden md:flex md:items-center w-full md:w-auto">
-            <ul class="pt-4 md:pt-0 md:flex md:justify-between">
+        <div id="nav-items" class="hidden sm:flex sm:items-center w-full sm:w-auto">
+            <ul class="pt-4 sm:pt-0 sm:flex sm:justify-between">
                 <li><a href="/manual">Manual</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="/">My Notes</a></li>
@@ -66,10 +66,10 @@
         {% if messages %}
         {% for category, message in messages %}
         <div id="alert" class="alert alert-{{ category }} grid grid-cols-auto-min">
-            <div class="text-center leading-16">{{ message }}</div>
-            <div class="relative w-0 h-0">
+            <div class="text-center py-5 pl-6">{{ message }}</div>
+            <div class="w-full h-full flex-center">
                 <button onclick="delete_alert()"
-                    class="mr-8 h-4 absolute top-5 right-4 hover:scale-150 transform hover:-translate-y-0.5 transition duration-200 ease-linear">&#10005;</button>
+                    class="mr-6 transition hover:scale-150 duration-200 ease-linear">&#10005;</button>
             </div>
         </div>
         {% endfor %}

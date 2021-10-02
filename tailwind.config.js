@@ -12,9 +12,15 @@ module.exports = {
       gridTemplateColumns: {
         "auto-min": "auto min-content",
         "min-auto": "min-content auto",
+        "txt-x": "auto 1.5rem",
       },
       lineHeight: {
         16: "4rem",
+      },
+      spacing: {
+        18: "4.5rem",
+        120: "30rem",
+        160: "40rem",
       },
     },
     fontFamily: {
