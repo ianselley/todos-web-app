@@ -38,8 +38,8 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="ml-3 flex items-center {% if note.complete == 1 %} complete {% endif %}">
-                        <span id="text{{ note.id }}">
+                    <div class="ml-3 grid grid-cols-auto-min {% if note.complete == 1 %} complete {% endif %}">
+                        <span id="text{{ note.id }}" class="note-content">
                             {{ note.content }}
                         </span>
                         <button onclick="edit_note( '{{ note.id }}' )" class="ml-2">
