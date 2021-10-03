@@ -1,6 +1,4 @@
-from website import create_app
+from website import app
 
 if __name__ == "__main__":
-    from waitress import serve
-    app = create_app()
-    serve(app, host="0.0.0.0", port=5000)
+    app(host="0.0.0.0", port=5000)
