@@ -7,16 +7,21 @@ from . import db
 views = Blueprint('views', __name__)
 
 
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/', methods=['GET'])
 @login_required
 def my_notes():
-    if request.method == 'POST':
-        content = request.form['note_content']
-        new_note = Note(content=content, user_id=current_user.id)
-        db.session.add(new_note)
-        db.session.commit()
-        flash('Note added successfully', category='success')
     return render_template('my_notes.html', user=current_user)
+
+
+@views.route('/post-note', methods=['POST'])
+@login_required
+def post_note():
+    content = request.form['note_content']
+    new_note = Note(content=content, user_id=current_user.id)
+    db.session.add(new_note)
+    db.session.commit()
+    flash('Note added successfully', category='success')
+    return redirect(url_for('views.my_notes'))
 
 
 @views.route('/delete-note/<note_id>', methods=['GET'])

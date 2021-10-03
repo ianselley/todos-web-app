@@ -776,8 +776,8 @@ video {
   border-color: rgba(161, 161, 170, var(--tw-divide-opacity));
 }
 
-.divide-opacity-50 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 0.5;
+.divide-opacity-70 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 0.7;
 }
 
 .bg-white {
@@ -1198,6 +1198,10 @@ footer span {
 
   .sm\:justify-between {
     justify-content: space-between;
+  }
+
+  .sm\:divide-opacity-50 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 0.5;
   }
 
   .sm\:pt-0 {
