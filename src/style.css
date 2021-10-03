@@ -20,16 +20,19 @@ nav img {
 }
 
 .alert {
-  /* flex items-center justify-center */
-  @apply border-t border-b  bg-opacity-25 bg-red-400 border-red-600 text-red-900;
+  @apply border-t border-b;
 }
 
 .alert-success {
-  @apply bg-green-400 border-green-600 bg-opacity-25 text-emerald-900;
+  @apply bg-green-400 bg-opacity-30 border-green-600 text-emerald-900;
 }
 
 .alert-warning {
-  @apply bg-yellow-400 border-yellow-600 bg-opacity-25 text-rose-900 font-medium;
+  @apply bg-yellow-400 bg-opacity-30 border-yellow-600 text-rose-900 font-medium;
+}
+
+.alert-error {
+  @apply bg-red-400 bg-opacity-30 border-red-600 text-red-900;
 }
 
 @responsive {

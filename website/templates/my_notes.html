@@ -7,14 +7,14 @@
 <h1 class="text-center text-6xl font-medium font-pacifico">TO-DO's</h1>
 <div class="flex justify-center">
     <div class="no-card sm:card lg:w-160 mt-14">
-        <form class="" method="POST">
+        <form class="" action="/post-note" method="POST">
             <input class="w-full" type="text" name="note_content" placeholder="Notes" autocomplete="off" autofocus>
             <button type="submit" class="mt-6 w-full btn-form">Save</button>
         </form>
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
             {% for note in user.notes %}
             <li class="p-4">
-                <div class="flex items-center">
+                <div id="text-plus-logo{{ note.id }}" class="flex items-center">
                     <div class="mr-3 flex flex-nowrap content-center">
                         <a href="/done/{{ note.id }}" class="mr-2">
                             <!-- onclick="location.href=this.href+window.scrollY;return false;" -->
@@ -38,8 +38,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="ml-3 flex items-center {% if note.complete == 1 %} complete {% endif %}"
-                        id="text-plus-logo{{ note.id }}">
+                    <div class="ml-3 flex items-center {% if note.complete == 1 %} complete {% endif %}">
                         <span id="text{{ note.id }}">
                             {{ note.content }}
                         </span>

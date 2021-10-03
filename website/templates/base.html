@@ -61,12 +61,16 @@
         </div>
     </nav>
 
+    <!-- This line is here to make theese css clases available if python uses them.
+    If they are not here, these classes aren't defined in main.css -->
+    <div class="text-fuchsia-900 hover:text-pink-600 underline hover:no-underline"></div>
+
     <div class="mb-24">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
         <div id="alert" class="alert alert-{{ category }} grid grid-cols-auto-min">
-            <div class="text-center py-5 pl-10">{{ message }}</div>
+            <div class="text-center py-5 pl-10">{{ message | safe }}</div>
             <div class="flex-center">
                 <button onclick="delete_alert()"
                     class="w-4 mr-6 transition hover:scale-150 duration-200 ease-linear">&#10005;</button>

@@ -893,9 +893,18 @@ video {
   color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
+.text-fuchsia-900 {
+  --tw-text-opacity: 1;
+  color: rgba(112, 26, 117, var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .shadow {
@@ -971,16 +980,8 @@ nav img {
 }
 
 .alert {
-  /* flex items-center justify-center */
   border-top-width: 1px;
   border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgba(220, 38, 38, var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.25;
-  --tw-text-opacity: 1;
-  color: rgba(127, 29, 29, var(--tw-text-opacity));
 }
 
 .alert-success {
@@ -988,7 +989,7 @@ nav img {
   border-color: rgba(22, 163, 74, var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgba(74, 222, 128, var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.25;
+  --tw-bg-opacity: 0.3;
   --tw-text-opacity: 1;
   color: rgba(6, 78, 59, var(--tw-text-opacity));
 }
@@ -998,10 +999,20 @@ nav img {
   border-color: rgba(202, 138, 4, var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgba(250, 204, 21, var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.25;
+  --tw-bg-opacity: 0.3;
   font-weight: 500;
   --tw-text-opacity: 1;
   color: rgba(136, 19, 55, var(--tw-text-opacity));
+}
+
+.alert-error {
+  --tw-border-opacity: 1;
+  border-color: rgba(220, 38, 38, var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.3;
+  --tw-text-opacity: 1;
+  color: rgba(127, 29, 29, var(--tw-text-opacity));
 }
 
 h2 ~ div:not(:last-child), h2 {
@@ -1144,6 +1155,15 @@ footer span {
 .hover\:text-gray-600:hover {
   --tw-text-opacity: 1;
   color: rgba(82, 82, 91, var(--tw-text-opacity));
+}
+
+.hover\:text-pink-600:hover {
+  --tw-text-opacity: 1;
+  color: rgba(219, 39, 119, var(--tw-text-opacity));
+}
+
+.hover\:no-underline:hover {
+  text-decoration: none;
 }
 
 .focus\:text-gray-600:focus {

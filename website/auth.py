@@ -17,10 +17,10 @@ def sign_up():
         user = User.query.filter_by(username=username).first()
 
         if user:
-            flash('Username already exists')
+            flash('Username already exists', category='error')
 
         elif password != password_confirm:
-            flash('Both passwords must be the same')
+            flash('Both passwords must be the same', category='error')
 
         else:
             # Se utiliza la función hash "sha256" para no almacenar la contraseña tal cual, sino gurardar el hash
@@ -54,9 +54,9 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('views.my_notes'))
             else:
-                flash('Invalid password, try again.')
+                flash('Invalid password, try again.', category='error')
         else:
-            flash('Username does not exist, try again.')
+            flash('Username does not exist, try again.', category='error')
 
     return render_template('login.html', user=current_user)
 
