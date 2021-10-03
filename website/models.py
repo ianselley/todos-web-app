@@ -1,7 +1,7 @@
 from . import db
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from flask_login import UserMixin
-from sqlalchemy.sql import func
+# from sqlalchemy.sql import func
 from datetime import datetime
 
 
