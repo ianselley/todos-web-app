@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <!-- Importo Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <title>{% block title %}TO-DO's{% endblock title %}</title>
+    <title>{% block title %}TO-DO's {% if user.is_authenticated %} - {{ user.username }} {% endif %} {% endblock title
+        %}</title>
 </head>
 
 <body class="bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
