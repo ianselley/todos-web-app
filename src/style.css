@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.note-content {
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
 @layer base {
   .flex-center {
     @apply flex justify-center items-center;

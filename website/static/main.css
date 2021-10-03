@@ -933,6 +933,11 @@ video {
   width: 18rem;
 }
 
+.note-content {
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
 nav img {
   height: auto;
   width: 9rem;
