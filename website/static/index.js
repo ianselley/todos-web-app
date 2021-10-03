@@ -1,7 +1,7 @@
 function edit_note(id_) {
   $(`#text-plus-logo${id_}`).replaceWith(`
     <div class="ml-3 w-full">
-        <form class="grid grid-cols-auto-min" method="post"
+        <form class="grid grid-cols-auto-min" method="POST"
         action="/edit_note/${id_}?scroll=${window.scrollY}">
                 <input value="${$("#text" + id_)
                   .text()
