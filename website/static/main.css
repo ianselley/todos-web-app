@@ -708,10 +708,6 @@ video {
   height: 1.5rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-24 {
   height: 6rem;
 }
@@ -726,6 +722,10 @@ video {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .grid-cols-auto-min {
@@ -835,8 +835,8 @@ video {
   padding-top: 1rem;
 }
 
-.pl-6 {
-  padding-left: 1.5rem;
+.pl-10 {
+  padding-left: 2.5rem;
 }
 
 .text-center {
