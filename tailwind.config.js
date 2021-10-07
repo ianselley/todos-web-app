@@ -27,6 +27,7 @@ module.exports = {
       rubik: "Rubik",
       montserrat: "Montserrat",
       pacifico: "Pacifico",
+      oleoScript: "Oleo Script",
     },
     colors: {
       transparent: "transparent",
