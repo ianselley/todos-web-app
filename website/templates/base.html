@@ -8,36 +8,33 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
     <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}">
-    <!-- Importo Material Icons de Google -->
+    <!-- Import Google Material Icons  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
-    <!-- Importo todos los Google Fonts -->
+    <!-- Import Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <!-- Importo Font Awesome -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap">
+    <!-- Import Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <title>{% block title %}TO-DO's {% if user.is_authenticated %} - {{ user.username }} {% endif %} {% endblock title
         %}</title>
 </head>
 
 <body class="bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
-    <nav
-        class="px-12 py-7 flex flex-wrap justify-between items-center shadow sticky top-0 z-10 bg-white dark:bg-gray-800">
+    <nav class="px-12 py-7 flex flex-wrap justify-between items-center shadow sticky top-0 z-10 bg-white">
 
         <!-- Ian Selley logo -->
         <div class="flex items-center">
-            <img class="dark:hidden" src="{{url_for('static', filename='images/logo.png')}}"
-                alt="dark logo that says Ian Selley">
-            <img class="hidden dark:inline-block" src="{{url_for('static', filename='images/logo_white.png')}}"
-                alt="white logo that says Ian Selley">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="logo that says Ian Selley">
         </div>
 
         <!-- Menu button -->
-        <div class="flex sm:hidden">
+        <div class="flex md:hidden">
             <button type="button" aria-label="toggle menu" onclick="toggle_nav_items()"
-                class="text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 focus:text-gray-600 dark:focus:text-gray-400">
+                class="text-gray-500  hover:text-gray-600 focus:text-gray-600">
                 <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
                     <path fill-rule="evenodd"
                         d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
@@ -47,11 +44,12 @@
         </div>
 
         <!-- Nav Items -->
-        <div id="nav-items" class="hidden sm:flex sm:items-center w-full sm:w-auto">
-            <ul class="pt-4 sm:pt-0 sm:flex sm:justify-between">
+        <div id="nav-items" class="hidden md:flex md:items-center w-full md:w-auto">
+            <ul class="pt-4 md:pt-0 md:flex md:justify-between">
                 <li><a href="/manual">Manual</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="/">My Notes</a></li>
+                <li><a href="/my-categories">My Categories</a></li>
+                <li><a href="/all-my-notes">All My Notes</a></li>
                 <li><a href="logout">Log Out</a></li>
                 <li><button class="material-icons">manage_accounts</button></li>
                 {% else %}
@@ -99,8 +97,17 @@
         </div>
     </footer>
 
-    <!-- Importo jQuery -->
+    <!-- Import jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script>
+        const notesParent = $('#notes-parent');
+        const lastImportant = $('[important]').last();
+        console.log(notesParent.children('[important]').last());
+        console.log(lastImportant);
+        if (notesParent.children('[important]').last() !== lastImportant) {
+            lastImportant.after('<hr style="position: relative; top: 1px; border: 1px solid rgba(0, 0, 0, 0.5);">');
+        }
+    </script> -->
 </body>
 
 </html>

@@ -1,11 +1,10 @@
-function edit_note(id_) {
+function edit_todo(end_point, id_) {
+  const content_value = document.getElementById(`text${id_}`).innerText;
   $(`#text-plus-logo${id_}`).replaceWith(`
     <div class="w-full">
         <form class="grid grid-cols-auto-min" method="POST"
-        action="/edit_note/${id_}?scroll=${window.scrollY}">
-                <input value="${$("#text" + id_)
-                  .text()
-                  .trim()}" placeholder="Note" name="content${id_}" autofocus>
+        action="/${end_point}/${id_}?scroll=${window.scrollY}">
+            <input id="content${id_}" name="content${id_}" onclick="event.stopPropagation()" autofocus placeholder="Note">
             <button type="submit" class="ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
                 class="bi bi-check2" viewBox="0 0 16 16">
@@ -15,12 +14,9 @@ function edit_note(id_) {
         </form>
     </div>
     `);
-  $(`name=[content${id_}]`).focus();
+  $(`#content${id_}`).focus();
+  $(`#content${id_}`).val(content_value);
 }
-
-// window.setTimeout(function () {
-//   $(".alert").fadeTo(500, 0);
-// }, 3500);
 
 function delete_alert() {
   $("#alert").remove();
@@ -31,11 +27,27 @@ function toggle_nav_items() {
 }
 
 function delete_note(note_id) {
-  fetch("/delete-note", {
+  fetch(`/delete-note/${note_id}`, {
+    method: "POST",
+  }).then((_res) => {
+    $(`#li-${note_id}`).remove();
+  });
+}
+
+function check_note(note_id) {
+  fetch(`/check-note/${note_id}`, {
+    method: "POST",
+  }).then((_res) => {
+    $(`#complete-${note_id}`).toggleClass("complete");
+  });
+}
+
+function toggle_important(note_id) {
+  fetch("/toggle-important", {
     method: "POST",
     body: JSON.stringify({ note_id: note_id }),
   }).then((_res) => {
-    window.location.href = "/";
+    window.location.reload();
   });
 }
 
@@ -53,12 +65,12 @@ function delete_note(note_id) {
 //   this.classList.toggle("fa-eye-slash");
 // });
 
-$("#toggle-pwd").click(function () {
-  $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $($(this).attr("toggle"));
-  if (input.attr("type") == "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
-  }
-});
+// $("#toggle-pwd").click(function () {
+//   $(this).toggleClass("fa-eye fa-eye-slash");
+//   var input = $($(this).attr("toggle"));
+//   if (input.attr("type") == "password") {
+//     input.attr("type", "text");
+//   } else {
+//     input.attr("type", "password");
+//   }
+// });

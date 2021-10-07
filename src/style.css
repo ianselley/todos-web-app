@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .note-content {
   word-wrap: break-word;
   overflow: hidden;
@@ -19,7 +27,7 @@ nav img {
 
 #nav-items a,
 #nav-items button {
-  @apply py-2 block w-full text-center sm:p-0 sm:mx-4 text-gray-700 hover:text-indigo-500;
+  @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
   @apply dark:text-gray-200 dark:hover:text-indigo-400;
   white-space: nowrap;
 }

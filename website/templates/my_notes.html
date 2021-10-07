@@ -4,20 +4,29 @@
 
 {% block content %}
 
-<h1 class="text-center text-6xl font-medium font-pacifico">TO-DO's</h1>
+<h1 class="text-center text-6xl font-medium font-oleoScript">
+    TO-DO's <span class="font-montserrat"> in {{category.name}}</span>
+</h1>
+
 <div class="flex justify-center">
     <div class="no-card sm:card lg:w-160 mt-14">
-        <form class="" action="/post-note" method="POST">
+        {% if category %}
+        <form class="" action="/post-note/{{category.id}}" method="POST">
             <input class="w-full" type="text" name="note_content" placeholder="Notes" autocomplete="off" autofocus>
             <button type="submit" class="mt-6 w-full btn-form">Save</button>
         </form>
+        {% endif %}
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
+
+            {% for important in [true, false] %}
+
+            <!-- In the first iteration it will show the impotant notes, and in the seccond the not important ones -->
             {% for note in user.notes %}
-            <li class="py-4 px-2.5 sm:p-4">
+            {% if note.category_id == category.id and note.important == important %}
+            <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}">
                 <div id="text-plus-logo{{ note.id }}" class="flex items-center">
                     <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
-                        <a href="/check-note/{{ note.id }}" class="mr-1 sm:mr-2">
-                            <!-- onclick="location.href=this.href+window.scrollY;return false;" -->
+                        <button class="mr-1 sm:mr-2" onclick="check_note('{{note.id}}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -27,8 +36,8 @@
                                 <path
                                     d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                             </svg>
-                        </a>
-                        <a href="/delete-note/{{ note.id }}" class="">
+                        </button>
+                        <button onclick="delete_note('{{note.id}}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
                                 class="bi bi-x-square" viewBox="0 0 16 16">
                                 <path
@@ -36,13 +45,14 @@
                                 <path
                                     d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg>
-                        </a>
+                        </button>
                     </div>
-                    <div class="ml-3 grid grid-cols-auto-min {% if note.complete == 1 %} complete {% endif %}">
+                    <div id="complete-{{note.id}}"
+                        class="ml-3 grid grid-cols-auto-min {% if note.complete == 1 %} complete {% endif %}">
                         <span id="text{{ note.id }}" class="note-content">
                             {{ note.content }}
                         </span>
-                        <button onclick="edit_note( '{{ note.id }}' )" class="ml-2">
+                        <button onclick="edit_todo('edit-note', '{{note.id}}')" class="ml-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="orange"
                                 class="bi bi-pen" viewBox="0 0 16 16">
                                 <path
@@ -52,12 +62,11 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
+            {% endfor %}
             {% endfor %}
         </ul>
     </div>
 </div>
-<script>
-    window.scrollTo(0, '{{ scroll }}'); // Sin las comillas simples sale error; de todas formas, de ninguna manera funciona xd
-</script>
 
 {% endblock content %}
