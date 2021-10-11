@@ -13,10 +13,12 @@ def get():
     return render_template("all_my_notes.html", user=current_user)
 
 
-@all_my_notes.route("/all-check-note/<note_id>", methods=["POST"])
+@all_my_notes.route("/all-check-note", methods=["POST"])
 @login_required
 def check_note(note_id):
-    note = Note.query.filter_by(id=note_id).first()
+    data = json.loads(request.data)
+    note_id = data['id_']
+    note = Note.query.filter_by(id=note_id)
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
@@ -25,12 +27,14 @@ def check_note(note_id):
         db.session.commit()
     else:
         flash("That note does not exist any more", category="error")
-    return redirect("/all-my-notes")
+    return jsonify({})
 
 
-@all_my_notes.route("/all-delete-note/<note_id>", methods=["POST"])
+@all_my_notes.route("/all-delete-note", methods=["POST"])
 @login_required
 def delete_note(note_id):
+    data = json.loads(request.data)
+    note_id = data['id_']
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
@@ -39,17 +43,19 @@ def delete_note(note_id):
         else:
             db.session.delete(note)
             db.session.commit()
-    return redirect("/all-my-notes")
+    return jsonify({})
 
 
-@all_my_notes.route("/all-edit-note/<note_id>", methods=["POST"])
+@all_my_notes.route("/all-edit-note", methods=["POST"])
 @login_required
 def edit_note(note_id):
-    note = Note.query.filter_by(id=note_id).first()
+    data = json.loads(request.data)
+    note_id = data['id_']
+    data = request
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
-            return redirect(f"/all-my-notes")
+            return redirect("/all-my-notes")
         new_content = request.form[f"content{note_id}"]
         change = False if note.content.strip() == new_content.strip() else True
         note.content = new_content
@@ -58,4 +64,4 @@ def edit_note(note_id):
             flash("Note edited successfully", category="success")
     else:
         flash("That note does not exist", category="error")
-    return redirect("/all-my-notes")
+    return jsonify({}) 

@@ -14,9 +14,9 @@
             <!-- In the first iteration it will show the impotant notes, and in the seccond the not important ones -->
             {% for note in user.notes %}
             {% if note.important == important %}
-            <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}" {% if important %} important {% endif %}">
+            <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}" {% if important %} important {% endif %}>
                 <div id="text-plus-logo{{ note.id }}" class="flex items-center">
-                    <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
+                   <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
                         <button class="mr-1 sm:mr-2" onclick="check_note('{{note.id}}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -38,12 +38,8 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="complete-{{note.id}}"
-                        class="ml-3 flex justify-between w-full {% if note.complete == 1 %} complete {% endif %}">
-                        <!-- grid grid-cols-auto-min -->
-                        <span id="text{{ note.id }}" class="note-content">
-                            {{ note.content }}
-                        </span>
+                    <div id="complete-{{note.id}}" class="ml-3 flex justify-between w-full {% if note.complete == 1 %} complete {% endif %}">
+                        <span id="text{{ note.id }}" class="note-content"> {{ note.content }} </span>
                         <button onclick="toggle_important('{{note.id}}')" class="ml-2">
                             <i
                                 class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
