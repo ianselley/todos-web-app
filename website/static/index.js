@@ -26,26 +26,38 @@ function toggle_nav_items() {
   $("#nav-items").toggleClass("hidden");
 }
 
-function delete_note(note_id) {
-  fetch(`/delete-note/${note_id}`, {
+function delete_note(id_) {
+  fetch("/delete-note", {
     method: "POST",
+    body: JSON.stringify({ id_: id_}),
   }).then((_res) => {
-    $(`#li-${note_id}`).remove();
+    window.location.reload();
   });
 }
 
-function check_note(note_id) {
-  fetch(`/check-note/${note_id}`, {
+function check_note(id_) {
+  fetch("/check-note", {
     method: "POST",
+    body: JSON.stringify({ id_: id_}),
   }).then((_res) => {
-    $(`#complete-${note_id}`).toggleClass("complete");
+    window.location.reload();
   });
 }
 
-function toggle_important(note_id) {
+function post_url(url_, id_) {
+  fetch(url_, {
+    method: "POST",
+    body: JSON.srtingify({ id_: id_ }),
+  }).then((_res) => {
+    window.location.reload();
+  });
+}
+
+
+function toggle_important(id_) {
   fetch("/toggle-important", {
     method: "POST",
-    body: JSON.stringify({ note_id: note_id }),
+    body: JSON.stringify({ id_: id_}),
   }).then((_res) => {
     window.location.reload();
   });
