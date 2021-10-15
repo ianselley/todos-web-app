@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Category, Note
 from . import db
+import json
 
 
 my_categories = Blueprint("my_categories", __name__)
@@ -18,15 +19,19 @@ def get():
 def post_category():
     name = request.form["category_name"]
     new_category = Category(name=name, user_id=current_user.id)
+    if new_category:
+        flash("That category already exists", category="error")
     db.session.add(new_category)
     db.session.commit()
     flash("Category added successfully", category="success")
     return redirect(url_for("my_categories.get"))
 
 
-@my_categories.route("/delete-category/<category_id>", methods=["POST"])
+@my_categories.route("/delete-category", methods=["POST"])
 @login_required
-def delete_category(category_id):
+def delete_category():
+    data = json.loads(request.data)
+    category_id = data["id_"]
     category = Category.query.filter_by(id=category_id).first()
     notes = Note.query.filter_by(category_id=category_id).all()
     if category:
@@ -38,7 +43,7 @@ def delete_category(category_id):
             for note in notes:
                 db.session.delete(note)
             db.session.commit()
-    return redirect("/my-categories")
+    return jsonify({})
 
 
 @my_categories.route("/edit-category/<category_id>", methods=["POST"])
@@ -49,12 +54,8 @@ def edit_category(category_id):
         if category.user_id != current_user.id:
             flash("You are not allowed to modify this category!", category="error")
             return redirect(url_for("my_categories.get"))
-        new_name = request.form[f"content{category_id}"]
-        change = False if category.name.strip() == new_name.strip() else True
-        category.name = new_name
+        category.name = request.form[f"content-{category_id}"]
         db.session.commit()
-        if change:
-            flash("Note edited successfully", category="success")
     else:
         flash("That note does not exist", category="error")
     return redirect("/my-categories")

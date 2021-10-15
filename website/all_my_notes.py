@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, redirect, request, flash
+from flask import Blueprint, render_template, redirect, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
+import json
 
 
 all_my_notes = Blueprint("all_my_notes", __name__)
@@ -17,7 +18,7 @@ def get():
 @login_required
 def check_note(note_id):
     data = json.loads(request.data)
-    note_id = data['id_']
+    note_id = data["id_"]
     note = Note.query.filter_by(id=note_id)
     if note:
         if note.user_id != current_user.id:
@@ -34,7 +35,7 @@ def check_note(note_id):
 @login_required
 def delete_note(note_id):
     data = json.loads(request.data)
-    note_id = data['id_']
+    note_id = data["id_"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
@@ -50,8 +51,8 @@ def delete_note(note_id):
 @login_required
 def edit_note(note_id):
     data = json.loads(request.data)
-    note_id = data['id_']
-    data = request
+    note_id = data["id_"]
+    note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
@@ -64,4 +65,4 @@ def edit_note(note_id):
             flash("Note edited successfully", category="success")
     else:
         flash("That note does not exist", category="error")
-    return jsonify({}) 
+    return jsonify({})

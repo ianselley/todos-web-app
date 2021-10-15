@@ -50,17 +50,17 @@
                 {% if user.is_authenticated %}
                 <li><a href="/my-categories">My Categories</a></li>
                 <li><a href="/all-my-notes">All My Notes</a></li>
-                <li><a href="logout">Log Out</a></li>
+                <li><a href="/logout">Log Out</a></li>
                 <li><button class="material-icons">manage_accounts</button></li>
                 {% else %}
                 <li><a href="/sign-up">Sign Up</a></li>
-                <li><a href="login">Log In</a></li>
+                <li><a href="/login">Log In</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-    <!-- This line is here to make theese css clases available if python uses them 
+    <!-- This line is here to make these css clases available if python uses them 
     (in '__init__.py'). If they are not here, these classes aren't defined in main.css -->
     <div class="text-fuchsia-900 hover:text-pink-600 underline hover:no-underline"></div>
 

@@ -30,8 +30,8 @@ def post_note(category_id):
 @login_required
 def check_note():
     data = json.loads(request.data)
-    note_id = data['id_']
-    note = Note.query.filter_by(id=note_id).first() 
+    note_id = data["id_"]
+    note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
@@ -48,8 +48,8 @@ def check_note():
 @login_required
 def delete_note():
     data = json.loads(request.data)
-    note_id = data['id_']
-    note = Note.query.filter_by(id=note_id).first() 
+    note_id = data["id_"]
+    note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
@@ -65,22 +65,17 @@ def delete_note():
 @login_required
 def edit_note():
     data = json.loads(request.data)
-    note_id = data['id_']
+    note_id = data["id_"]
     note = Note.query.filter_by(id=note_id).first()
-    category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
-            return redirect(f"/my-notes/{category_id}")
-        new_content = request.form[f"content{note_id}"]
-        change = False if note.content.strip() == new_content.strip() else True
-        note.content = new_content
+            return redirect(f"/my-notes/{note.category_id}")
+        note.content = request.form[f"content-{note_id}"]
         db.session.commit()
-        if change:
-            flash("Note edited successfully", category="success")
     else:
         flash("That note does not exist", category="error")
-    return jsonify({}) 
+    return jsonify({})
 
 
 @my_notes.route("/toggle-important", methods=["POST"])
