@@ -1,63 +1,30 @@
-function edit_todo(end_point, id_) {
-  const content_value = document.getElementById(`text${id_}`).innerText;
-  $(`#text-plus-logo${id_}`).replaceWith(`
-    <div class="w-full">
-        <form class="grid grid-cols-auto-min" method="POST"
-        action="/${end_point}/${id_}?scroll=${window.scrollY}">
-            <input id="content${id_}" name="content${id_}" onclick="event.stopPropagation()" autofocus placeholder="Note">
-            <button type="submit" class="ml-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
-                class="bi bi-check2" viewBox="0 0 16 16">
-                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                </svg>
-            </button>
-        </form>
-    </div>
-    `);
-  $(`#content${id_}`).focus();
-  $(`#content${id_}`).val(content_value);
+function edit_category(id, name) {
+  $(`#text-plus-logo-${id}`).toggleClass("hidden");
+  $(`#edit-${id}`).toggleClass("hidden");
+  $(`#content-${id}`).focus();
+  $(`#content-${id}`).val(name);
+}
+
+function edit_note(id, name) {
+  $(`#text-plus-logo-${id}`).toggleClass("hidden");
+  $(`#edit-${id}`).toggleClass("hidden");
+  $(`#edit-button-${id}`).toggleClass("hidden");
+  $(`#content-${id}`).focus();
+  $(`#content-${id}`).val(name);
 }
 
 function delete_alert() {
-  $("#alert").remove();
+  $("#alert").hide("slow");
 }
 
 function toggle_nav_items() {
   $("#nav-items").toggleClass("hidden");
 }
 
-function delete_note(id_) {
-  fetch("/delete-note", {
-    method: "POST",
-    body: JSON.stringify({ id_: id_}),
-  }).then((_res) => {
-    window.location.reload();
-  });
-}
-
-function check_note(id_) {
-  fetch("/check-note", {
-    method: "POST",
-    body: JSON.stringify({ id_: id_}),
-  }).then((_res) => {
-    window.location.reload();
-  });
-}
-
-function post_url(url_, id_) {
+function fetch_reload(url_, id_) {
   fetch(url_, {
     method: "POST",
-    body: JSON.srtingify({ id_: id_ }),
-  }).then((_res) => {
-    window.location.reload();
-  });
-}
-
-
-function toggle_important(id_) {
-  fetch("/toggle-important", {
-    method: "POST",
-    body: JSON.stringify({ id_: id_}),
+    body: JSON.stringify({ id_: id_ }),
   }).then((_res) => {
     window.location.reload();
   });

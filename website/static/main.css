@@ -640,10 +640,6 @@ video {
   z-index: 10;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
 .mt-14 {
   margin-top: 3.5rem;
 }
@@ -658,6 +654,10 @@ video {
 
 .ml-3 {
   margin-left: 0.75rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .mb-24 {
@@ -871,10 +871,6 @@ video {
   font-family: Montserrat;
 }
 
-.font-pacifico {
-  font-family: Pacifico;
-}
-
 .text-6xl {
   font-size: 3.75rem;
   line-height: 1;
@@ -928,6 +924,11 @@ video {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgba(82, 82, 91, var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -966,7 +967,11 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.note-content {
+.md-16 {
+  font-size: 16px !important;
+}
+
+.no-overflow {
   word-wrap: break-word;
   overflow: hidden;
 }

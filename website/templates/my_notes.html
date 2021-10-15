@@ -4,9 +4,7 @@
 
 {% block content %}
 
-<h1 class="text-center text-6xl font-medium font-oleoScript">
-    TO-DO's <span class="font-montserrat"> in {{category.name}}</span>
-</h1>
+<h1 class="text-center text-6xl font-medium font-oleoScript no-overflow">{{category.name}}</h1>
 
 <div class="flex justify-center">
     <div class="no-card sm:card lg:w-160 mt-14">
@@ -24,9 +22,9 @@
             {% for note in user.notes %}
             {% if note.category_id == category.id and note.important == important %}
             <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}">
-                <div id="text-plus-logo{{ note.id }}" class="flex items-center">
-                    <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
-                        <button class="mr-1 sm:mr-2" onclick="check_note('{{note.id}}')">
+                <div class="flex items-center">
+                    <div id="text-plus-logo-{{ note.id }}" class="mr-0 sm:mr-3 flex flex-nowrap content-center">
+                        <button class="mr-1 sm:mr-2" onclick="fetch_reload('/check-note', '{{note.id}}');">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -37,7 +35,7 @@
                                     d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                             </svg>
                         </button>
-                        <button onclick="delete_note('{{note.id}}')">
+                        <button onclick="fetch_reload('/delete-note', '{{note.id}}');">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
                                 class="bi bi-x-square" viewBox="0 0 16 16">
                                 <path
@@ -49,16 +47,29 @@
                     </div>
                     <div id="complete-{{note.id}}"
                         class="ml-3 grid grid-cols-auto-min {% if note.complete == 1 %} complete {% endif %}">
-                        <span id="text{{ note.id }}" class="note-content">
+                        <span class="no-overflow">
                             {{ note.content }}
                         </span>
-                        <button onclick="edit_note('{{note.id}}')" class="ml-2">
+                        <button id="edit-button-{{note.id}}" onclick="edit_note('{{note.id}}', '{{note.name}}')"
+                            class="ml-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="orange"
                                 class="bi bi-pen" viewBox="0 0 16 16">
                                 <path
                                     d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
                             </svg>
                         </button>
+                    </div>
+                    <div id="edit-{{note.id}}" class="w-full hidden">
+                        <div class="grid grid-cols-auto-min">
+                            <input id="content-{{note.id}}" name="content-{{note.id}}" autofocus placeholder="Note">
+                            <button type="submit" class="ml-2" onclick="fetch_reload('/edit-note', '{{note.id}}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
+                                    class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </li>

@@ -15,9 +15,9 @@
             {% for note in user.notes %}
             {% if note.important == important %}
             <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}" {% if important %} important {% endif %}>
-                <div id="text-plus-logo{{ note.id }}" class="flex items-center">
-                   <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
-                        <button class="mr-1 sm:mr-2" onclick="check_note('{{note.id}}')">
+                <div class="flex items-center">
+                    <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
+                        <button class="mr-1 sm:mr-2" onclick="fetch_reload('/check-note', '{{note.id}}');">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -28,7 +28,7 @@
                                     d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                             </svg>
                         </button>
-                        <button onclick="delete_note('{{note.id}}')">
+                        <button onclick="fetch_reload('/delete-note', '{{note.id}}');">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
                                 class="bi bi-x-square" viewBox="0 0 16 16">
                                 <path
@@ -38,9 +38,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="complete-{{note.id}}" class="ml-3 flex justify-between w-full {% if note.complete == 1 %} complete {% endif %}">
-                        <span id="text{{ note.id }}" class="note-content"> {{ note.content }} </span>
-                        <button onclick="toggle_important('{{note.id}}')" class="ml-2">
+                    <div id="complete-{{note.id}}"
+                        class="ml-3 flex justify-between w-full {% if note.complete == 1 %} complete {% endif %}">
+                        <span class="no-overflow"> {{ note.content }} </span>
+                        <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
                             <i
                                 class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
                             </i>
