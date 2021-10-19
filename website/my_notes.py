@@ -22,7 +22,6 @@ def post_note(category_id):
     new_note = Note(content=content, category_id=category_id, user_id=current_user.id)
     db.session.add(new_note)
     db.session.commit()
-    flash("Note added successfully", category="success")
     return redirect(f"/my-notes/{category_id}")
 
 
@@ -65,13 +64,19 @@ def delete_note():
 @login_required
 def edit_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
+    note_content = data["content"]
+    note_details = data["details"]
+    note_expires = data["expires"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
             return redirect(f"/my-notes/{note.category_id}")
-        note.content = request.form[f"content-{note_id}"]
+        note.content = note_content
+        note.details = note_details
+        print(note_expires)
+        # note.expires = note_expires
         db.session.commit()
     else:
         flash("That note does not exist", category="error")

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
 input,
 textarea,
 button,
@@ -32,7 +36,6 @@ nav img {
 #nav-items a,
 #nav-items button {
   @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
-  @apply dark:text-gray-200 dark:hover:text-indigo-400;
   white-space: nowrap;
 }
 
@@ -54,13 +57,13 @@ nav img {
 
 @responsive {
   .card {
-    @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-12 mb-48 w-120;
+    @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-10 mb-48 w-120;
   }
 }
 
 @responsive {
   .no-card {
-    @apply mb-48 w-72;
+    @apply mb-48 w-72 mt-10;
   }
 }
 
@@ -106,8 +109,18 @@ form ~ ul {
   @apply line-through text-gray-400;
 }
 
+.show-modal {
+  opacity: 1;
+  pointer-events: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  @apply flex items-center justify-center;
+}
+
 .btn-form {
-  @apply h-12 w-full bg-green-500 rounded-full text-white font-bold text-xl shadow-lg;
+  @apply h-12 bg-green-500 rounded-full text-white font-bold text-xl shadow-lg;
   @apply hover:shadow-xl transition-all duration-200 ease-in-out; /* mb-48 sm:mb-0  */
 }
 

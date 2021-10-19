@@ -3,23 +3,24 @@
 {% block title %} {{ super() }} {% endblock title %}
 
 {% block content %}
-<h1 class="text-center text-6xl font-medium font-oleoScript">Categories</h1>
+<h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">Categories</h1>
 <div class="flex justify-center">
-    <div class="no-card sm:card lg:w-160 mt-14">
-        <form class="" action="/post-category" method="POST">
+    <div class="no-card sm:card lg:w-160">
+        <form onsubmit="return false;">
             <input class="w-full" type="text" name="category_name" placeholder="Categories" autocomplete="off"
                 autofocus>
-            <button type="submit" class="mt-6 w-full btn-form">Save</button>
+            <button type="submit" onclick="fetch_reload('/post-category', $(this).prev().val())"
+                class="mt-6 w-full btn-form">Save</button>
         </form>
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
             {% for category in user.categories %}
             <li>
-                <div onclick="" class="py-4 px-2.5 sm:p-4">
+                <div class="py-4 px-2.5 sm:p-4">
                     <div id="text-plus-logo-{{ category.id }}" class="flex items-center flex-nowrap content-center">
                         <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
                             <button onclick="fetch_reload('/delete-category', '{{category.id}}');">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
-                                    class="bi bi-x-square" viewBox="0 0 16 16">
+                                    viewBox="0 0 16 16">
                                     <path
                                         d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                     <path
@@ -29,11 +30,17 @@
                         </div>
                         <div class="flex justify-between w-full">
                             <div class="ml-3 grid grid-cols-auto-min">
-                                <span class="category-name no-overflow">
+                                <span class="no-overflow">
                                     {{ category.name }}
                                 </span>
-                                <a class="ml-2 flex items-center" href='/my-notes/{{ category.id }}'">
-                                    <span class=" material-icons text-gray-600">open_in_new</span>
+                                <a class="ml-3 flex items-center" href='/my-notes/{{ category.id }}'">
+                                    <svg xmlns=" http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem"
+                                    fill="black" fill-opacity="0.7" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                    <path fill-rule="evenodd"
+                                        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                    </svg>
                                 </a>
                             </div>
                             <button onclick="edit_category('{{category.id}}', '{{category.name}}')" class="ml-2">
@@ -51,7 +58,7 @@
                                 placeholder="Category">
                             <button type="submit" class="ml-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
-                                    class="bi bi-check2" viewBox="0 0 16 16">
+                                    viewBox="0 0 16 16">
                                     <path
                                         d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                                 </svg>

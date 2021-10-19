@@ -4,9 +4,9 @@
 
 {% block content %}
 
-<h1 class="text-center text-6xl font-medium font-oleoScript">All my to-do's</h1>
+<h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">All my to-do's</h1>
 <div class="flex justify-center">
-    <div class="no-card sm:card lg:w-160 mt-14">
+    <div class="no-card sm:card lg:w-160">
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50" id="notes-parent">
 
             {% for important in [true, false] %}
@@ -38,9 +38,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="complete-{{note.id}}"
-                        class="ml-3 flex justify-between w-full {% if note.complete == 1 %} complete {% endif %}">
-                        <span class="no-overflow"> {{ note.content }} </span>
+                    <div class="ml-3 grid grid-cols-auto-min w-full">
+                        <span class="no-overflow {% if note.complete == 1 %} complete {% endif %}">
+                            {{note.content}}
+                        </span>
                         <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
                             <i
                                 class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
