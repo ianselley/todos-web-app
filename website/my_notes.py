@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import User, Note, Category
+from .models import Note, Category
 from . import db
 import json
+from datetime import date
 
 
 my_notes = Blueprint("my_notes", __name__)
@@ -75,8 +76,8 @@ def edit_note():
             return redirect(f"/my-notes/{note.category_id}")
         note.content = note_content
         note.details = note_details
-        print(note_expires)
-        # note.expires = note_expires
+        print("note_expires:", note_expires)
+        note.expires = date(*map(int, note_expires.split("-")))
         db.session.commit()
     else:
         flash("That note does not exist", category="error")

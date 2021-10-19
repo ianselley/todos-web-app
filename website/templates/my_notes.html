@@ -115,7 +115,6 @@
                     </label>
                     <input id="note-expires-{{note.id}}" type="date" class="mt-2"
                         value="{% if note.expires %}{{note.expires}}{% endif %}">
-                    {{note.expires}}
                     <div class="w-full flex justify-around">
                         <button class="mt-6 w-1/3 btn-form" type="submit"
                             onclick="apply_changes('{{note.id}}', $('#modal-title-{{note.id}}').text().trim(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">

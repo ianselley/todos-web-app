@@ -58,7 +58,6 @@ function apply_changes(id, content, details, expires) {
     }),
   }).then((_res) => {
     window.location.reload();
-    console.log(details);
   });
 }
 
