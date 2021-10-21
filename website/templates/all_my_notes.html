@@ -7,8 +7,8 @@
 <h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">All my to-do's</h1>
 <div class="flex justify-center">
     <div class="no-card sm:card lg:w-160">
+        {% if user.notes %}
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50" id="notes-parent">
-
             {% for important in [true, false] %}
 
             <!-- In the first iteration it will show the impotant notes, and in the seccond the not important ones -->
@@ -55,6 +55,13 @@
             {% endfor %}
 
         </ul>
+        {% else %}
+        <div class="text-center">You don't have any notes to view. <br>
+            <a href="/my-categories" class="text-fuchsia-900 hover:text-indigo-700 underline hover:no-underline">Add a
+                category</a> if you haven't already, and in side it add a note. <br>
+            Then come here to see it.
+        </div>
+        {% endif %}
     </div>
 </div>
 

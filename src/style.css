@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 input,
 textarea,
 button,
@@ -67,8 +72,7 @@ nav img {
   }
 }
 
-h2 ~ div:not(:last-child),
-h2 {
+.form-padding > div:not(:last-child) {
   @apply mb-4;
 }
 

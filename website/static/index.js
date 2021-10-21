@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
-  //The first argument are the elements to which the plugin shall be initialized
-  //The second argument has to be at least a empty object or an object with your desired options
-  OverlayScrollbars(document.querySelectorAll("body"), {});
+let scrollpos = localStorage.getItem("scrollpos");
+if (scrollpos) window.scrollTo(0, scrollpos); // This if statement can be modified to not scroll in some cases, but I don't know how to do it
+// I may have to group all this into one function and call the fuction with a boolean parameter to determine wether or not I want to go to the beggining of the page
+window.addEventListener("beforeunload", function (e) {
+  localStorage.setItem("scrollpos", window.scrollY);
 });
 
 function edit_category(id, name) {

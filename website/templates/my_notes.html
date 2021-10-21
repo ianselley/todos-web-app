@@ -47,14 +47,15 @@
                     </div>
                     <div class="sm:hidden">
                         <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
-                            <i
+                            <em
                                 class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
-                            </i>
+                            </em>
                         </button>
                     </div>
                     <div class="flex justify-between w-full">
                         <div class=" ml-3 grid grid-cols-auto-min">
-                            <span class="no-overflow {% if note.complete == 1 %} complete {% endif %}">
+                            <span name="note-content" note-id="{{note.id}}"
+                                class="no-overflow {% if note.complete %} complete {% endif %}">
                                 {{note.content}}
                             </span>
                             <button class="ml-3 flex items-center" onclick="show_modal('{{note.id}}')">
@@ -67,9 +68,9 @@
                         </div>
                         <button onclick="fetch_reload('/toggle-important', '{{note.id}}');"
                             class="hidden sm:inline-block ml-2">
-                            <i
+                            <em
                                 class="{% if important %} fas {% else %} far {% endif %} fa-star text-amber-500 sm:text-yellow-400 fa-lg">
-                            </i>
+                            </em>
                         </button>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                         </div>
                         <div id="edit-{{note.id}}" class="w-full hidden">
                             <form onsubmit="return false;" class="grid grid-cols-auto-min">
-                                <input id="content-{{note.id}}" name="content-{{note.id}}" autofocus placeholder="Note">
+                                <input id="content-{{note.id}}" name="content-{{note.id}}" placeholder="Note">
                                 <button type="submit" class="ml-2"
                                     onclick="change_note('{{note.id}}', $(this).prev().val())">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem"
@@ -108,7 +109,7 @@
                         </div>
                     </div>
                     <textarea placeholder="Write here anything you want to add to your note"
-                        class="mt-6 px-3 py-2 w-72 sm:w-3/4 border border-gray-400 rounded-md"
+                        class="mt-6 px-3 py-2 w-72 sm:w-3/4 outline-none border-2 border-gray-300 focus:border-blue-300 rounded-md"
                         id="note-details-{{note.id}}">{% if note.details %}{{note.details}}{% endif %}</textarea>
                     <label for="note-expires-{{note.id}}" class="mt-6">Enter an expiring date for this note
                         (Optional)

@@ -8,6 +8,8 @@ from datetime import date
 
 my_notes = Blueprint("my_notes", __name__)
 
+not_allowed = "You are not allowed to modify this note!"
+
 
 @my_notes.route("/my-notes/<category_id>", methods=["GET"])
 @login_required
@@ -35,7 +37,7 @@ def check_note():
     category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
-            flash("You are not allowed to modify this note!", category="error")
+            flash(not_allowed, category="error")
             return redirect(f"/my-notes/{category_id}")
         note.complete = not note.complete
         db.session.commit()
@@ -53,7 +55,7 @@ def delete_note():
     category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
-            flash("You are not allowed to modify this note!", category="error")
+            flash(not_allowed, category="error")
             return redirect(f"/my-notes/{category_id}")
         else:
             db.session.delete(note)
@@ -72,12 +74,12 @@ def edit_note():
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
-            flash("You are not allowed to modify this note!", category="error")
+            flash(not_allowed, category="error")
             return redirect(f"/my-notes/{note.category_id}")
         note.content = note_content
         note.details = note_details
-        print("note_expires:", note_expires)
-        note.expires = date(*map(int, note_expires.split("-")))
+        if note.expires:
+            note.expires = date(*map(int, note_expires.split("-")))
         db.session.commit()
     else:
         flash("That note does not exist", category="error")

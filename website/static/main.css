@@ -724,8 +724,16 @@ video {
   margin-top: auto;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mb-auto {
+  margin-bottom: auto;
 }
 
 .mb-8 {
@@ -788,16 +796,16 @@ video {
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-6 {
   width: 1.5rem;
 }
 
 .w-4 {
   width: 1rem;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .w-72 {
@@ -888,9 +896,13 @@ video {
   border-width: 1px;
 }
 
-.border-gray-400 {
+.border-2 {
+  border-width: 2px;
+}
+
+.border-gray-300 {
   --tw-border-opacity: 1;
-  border-color: rgba(161, 161, 170, var(--tw-border-opacity));
+  border-color: rgba(212, 212, 216, var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -1059,14 +1071,14 @@ video {
   color: rgba(245, 158, 11, var(--tw-text-opacity));
 }
 
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgba(113, 113, 122, var(--tw-text-opacity));
-}
-
 .text-fuchsia-900 {
   --tw-text-opacity: 1;
   color: rgba(112, 26, 117, var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgba(113, 113, 122, var(--tw-text-opacity));
 }
 
 .text-white {
@@ -1086,6 +1098,11 @@ video {
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .invert {
@@ -1121,6 +1138,12 @@ video {
 
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  /* max-width: 100%; */
+  overflow-x: hidden;
 }
 
 input,
@@ -1212,7 +1235,7 @@ nav img {
   color: rgba(127, 29, 29, var(--tw-text-opacity));
 }
 
-h2 ~ div:not(:last-child), h2 {
+.form-padding > div:not(:last-child) {
   margin-bottom: 1rem;
 }
 
@@ -1360,6 +1383,11 @@ footer span {
   transform: var(--tw-transform);
 }
 
+.hover\:text-indigo-700:hover {
+  --tw-text-opacity: 1;
+  color: rgba(67, 56, 202, var(--tw-text-opacity));
+}
+
 .hover\:text-gray-600:hover {
   --tw-text-opacity: 1;
   color: rgba(82, 82, 91, var(--tw-text-opacity));
@@ -1372,6 +1400,11 @@ footer span {
 
 .hover\:no-underline:hover {
   text-decoration: none;
+}
+
+.focus\:border-blue-300:focus {
+  --tw-border-opacity: 1;
+  border-color: rgba(147, 197, 253, var(--tw-border-opacity));
 }
 
 .focus\:text-gray-600:focus {

@@ -6,12 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
-    <!-- Plugin CSS to modify scrollbar -->
-    <link type="text/css" href="{{url_for('static', filename='OverlayScrollbars.css')}}" rel="stylesheet" />
     <!-- import jQuery JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-    <!-- Plugin JS to modify scrollbar -->
-    <script type="text/javascript" src="{{url_for('static', filename='OverlayScrollbars.js')}}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{url_for('static', filename='index.js')}}" defer></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}">
     <!-- Import Google Material Icons  -->
@@ -29,7 +25,7 @@
         %}</title>
 </head>
 
-<body class="bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
+<body class="w-screen bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
     <nav class="px-12 py-7 flex flex-wrap justify-between items-center shadow sticky top-0 z-10 bg-white">
 
         <!-- Ian Selley logo -->
@@ -99,7 +95,7 @@
     <div class="mt-20">{% block content %}{% endblock content %}</div>
 
     <footer
-        class="px-6 lg:px-24 bg-coolGray-800 h-24 mt-auto flex justify-evenly items-center text-white text-xl font-thin font-montserrat">
+        class="mt-auto px-6 lg:px-24 bg-coolGray-800 h-24 flex justify-evenly items-center text-white text-xl font-thin font-montserrat">
         <div>
             <a href="https://github.com/ianselley/" class="fab fa-github"><span>GitHub</span></a>
         </div>
@@ -113,27 +109,6 @@
             <a href="https://twitter.com/iansm2001/" class="fab fa-twitter"><span>Twitter</span></a>
         </div>
     </footer>
-
-    <!-- This keeps the scroll in the same position -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function (event) {
-            var scrollpos = localStorage.getItem('scrollpos');
-            if (scrollpos) window.scrollTo(0, scrollpos);
-        });
-
-        window.onbeforeunload = function (e) {
-            localStorage.setItem('scrollpos', window.scrollY);
-        };
-    </script>
-    <!-- <script>
-        const notesParent = $('#notes-parent');
-        const lastImportant = $('[important]').last();
-        console.log(notesParent.children('[important]').last());
-        console.log(lastImportant);
-        if (notesParent.children('[important]').last() !== lastImportant) {
-            lastImportant.after('<hr style="position: relative; top: 1px; border: 1px solid rgba(0, 0, 0, 0.5);">');
-        }
-    </script> -->
 </body>
 
 </html>
