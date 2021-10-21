@@ -17,14 +17,16 @@ def get():
 @my_categories.route("/post-category", methods=["POST"])
 @login_required
 def post_category():
-    name = request.form["category_name"]
-    new_category = Category(name=name, user_id=current_user.id)
-    if new_category:
+    data = json.loads(request.data)
+    name = data["id_"]
+    categories = Category.query.filter_by(user_id=current_user.id).all()
+    if name in [category.name for category in categories]:
         flash("That category already exists", category="error")
+        return jsonify({})
+    new_category = Category(name=name, user_id=current_user.id)
     db.session.add(new_category)
     db.session.commit()
-    flash("Category added successfully", category="success")
-    return redirect(url_for("my_categories.get"))
+    return jsonify({})
 
 
 @my_categories.route("/delete-category", methods=["POST"])

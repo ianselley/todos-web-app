@@ -4,14 +4,14 @@
 
 {% block content %}
 
-<h1 class="text-center text-6xl font-medium font-oleoScript no-overflow">{{category.name}}</h1>
+<h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">{{category.name}}</h1>
 
 <div class="flex justify-center">
-    <div class="no-card sm:card lg:w-160 mt-14">
+    <div class="no-card sm:card lg:w-160">
         {% if category %}
-        <form class="" action="/post-note/{{category.id}}" method="POST">
+        <form action="/post-note/{{category.id}}" method="POST">
             <input class="w-full" type="text" name="note_content" placeholder="Notes" autocomplete="off" autofocus>
-            <button type="submit" class="mt-6 w-full btn-form">Save</button>
+            <button class="mt-6 w-full btn-form" type="submit">Save</button>
         </form>
         {% endif %}
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
@@ -23,7 +23,7 @@
             {% if note.category_id == category.id and note.important == important %}
             <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}">
                 <div class="flex items-center">
-                    <div id="text-plus-logo-{{ note.id }}" class="mr-0 sm:mr-3 flex flex-nowrap content-center">
+                    <div class="mr-0 sm:mr-3 hidden sm:flex sm:flex-nowrap sm:content-center">
                         <button class="mr-1 sm:mr-2" onclick="fetch_reload('/check-note', '{{note.id}}');">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
                                 class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -45,34 +45,88 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="complete-{{note.id}}"
-                        class="ml-3 grid grid-cols-auto-min {% if note.complete == 1 %} complete {% endif %}">
-                        <span class="no-overflow">
-                            {{ note.content }}
-                        </span>
-                        <button id="edit-button-{{note.id}}" onclick="edit_note('{{note.id}}', '{{note.name}}')"
-                            class="ml-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="orange"
-                                class="bi bi-pen" viewBox="0 0 16 16">
-                                <path
-                                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
-                            </svg>
+                    <div class="sm:hidden">
+                        <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
+                            <em
+                                class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
+                            </em>
                         </button>
                     </div>
-                    <div id="edit-{{note.id}}" class="w-full hidden">
-                        <div class="grid grid-cols-auto-min">
-                            <input id="content-{{note.id}}" name="content-{{note.id}}" autofocus placeholder="Note">
-                            <button type="submit" class="ml-2" onclick="fetch_reload('/edit-note', '{{note.id}}')">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="green"
-                                    class="bi bi-check2" viewBox="0 0 16 16">
-                                    <path
-                                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <div class="flex justify-between w-full">
+                        <div class=" ml-3 grid grid-cols-auto-min">
+                            <span name="note-content" note-id="{{note.id}}"
+                                class="no-overflow {% if note.complete %} complete {% endif %}">
+                                {{note.content}}
+                            </span>
+                            <button class="ml-3 flex items-center" onclick="show_modal('{{note.id}}')">
+                                <svg xmlns=" http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
                                 </svg>
                             </button>
                         </div>
+                        <button onclick="fetch_reload('/toggle-important', '{{note.id}}');"
+                            class="hidden sm:inline-block ml-2">
+                            <em
+                                class="{% if important %} fas {% else %} far {% endif %} fa-star text-amber-500 sm:text-yellow-400 fa-lg">
+                            </em>
+                        </button>
                     </div>
                 </div>
             </li>
+            <div id="modal-container-{{note.id}}"
+                class="hidden pointer-events-none bg-black bg-opacity-20 w-screen h-screen">
+                <div id="modal-{{note.id}}"
+                    class="w-screen h-screen max-h-screen sm:w-[75vw] sm:h-[auto] bg-warmGray-50 sm:rounded-xl shadow-xl p-6 flex flex-col items-center justify-center">
+                    <div class="w-full">
+                        <div id="text-plus-logo-{{note.id}}" class="grid grid-cols-auto-min">
+                            <h1 id="modal-title-{{note.id}}" name="modal-title-{{note.id}}"
+                                class="text-center text-4xl no-overflow">
+                                {{note.content}}
+                            </h1>
+                            <button class="ml-2"
+                                onclick="edit_note('{{note.id}}', $('#modal-title-{{note.id}}').text().trim())">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="orange"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="edit-{{note.id}}" class="w-full hidden">
+                            <form onsubmit="return false;" class="grid grid-cols-auto-min">
+                                <input id="content-{{note.id}}" name="content-{{note.id}}" placeholder="Note">
+                                <button type="submit" class="ml-2"
+                                    onclick="change_note('{{note.id}}', $(this).prev().val())">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem"
+                                        fill="green" viewBox="0 0 16 16">
+                                        <path
+                                            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <textarea placeholder="Write here anything you want to add to your note"
+                        class="mt-6 px-3 py-2 w-72 sm:w-3/4 outline-none border-2 border-gray-300 focus:border-blue-300 rounded-md"
+                        id="note-details-{{note.id}}">{% if note.details %}{{note.details}}{% endif %}</textarea>
+                    <label for="note-expires-{{note.id}}" class="mt-6">Enter an expiring date for this note
+                        (Optional)
+                    </label>
+                    <input id="note-expires-{{note.id}}" type="date" class="mt-2"
+                        value="{% if note.expires %}{{note.expires}}{% endif %}">
+                    <div class="w-full flex justify-around">
+                        <button class="mt-6 w-1/3 btn-form" type="submit"
+                            onclick="apply_changes('{{note.id}}', $('#modal-title-{{note.id}}').text().trim(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">
+                            Apply
+                        </button>
+                        <button class="mt-6 w-1/3 btn-form" onclick="window.location.reload();">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
             {% endif %}
             {% endfor %}
             {% endfor %}

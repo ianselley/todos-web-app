@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
-    <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
+    <!-- import jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='index.js')}}" defer></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}">
     <!-- Import Google Material Icons  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
@@ -23,12 +25,23 @@
         %}</title>
 </head>
 
-<body class="bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
+<body class="w-screen bg-gradient-to-r from-cyan-100 to-indigo-200 font-rubik min-h-screen flex flex-col">
     <nav class="px-12 py-7 flex flex-wrap justify-between items-center shadow sticky top-0 z-10 bg-white">
 
         <!-- Ian Selley logo -->
-        <div class="flex items-center">
-            <img src="{{url_for('static', filename='images/logo.png')}}" alt="logo that says Ian Selley">
+        <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.153 24.167"
+                width="133.153" height="24.167">
+                <g fill="#ead017" color="#ead017" transform="translate(0, 0) scale(0.6041667)"><svg width="48.0"
+                        height="40.0" x="0.0" y="0.0" viewBox="0 0 48 40">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M41.576 0L12.872 28.703v-2.95L38.625 0h-4.1l-10.9 10.898L12.725 0h-4.1l12.949 12.95-1.476 1.474L5.675 0h-4.1l16.474 16.475-1.475 1.475L0 1.376V40h2.9V8.378l2.087 2.086V40h2.9V13.364l2.086 2.087V40h2.9v-.146l10.752-10.752L34.525 40h2.951V15.253l2.086-2.087V40h2.9V10.266l2.087-2.086V40h2.898V5.434h-.153l.153-.154V1.178L12.872 35.754v-2.95L45.675 0h-4.1zm-8.849 20l1.848-1.848v3.697L32.727 20zm-19.855-1.65L14.522 20l-1.65 1.65V18.35zm16.329 5.176l1.476-1.474 3.898 3.899v2.952l-5.374-5.377zm-3.526 3.526l1.475-1.476 7.425 7.426v2.95l-8.9-8.9z">
+                        </path>
+                    </svg></g>
+                <line x1="41" y1="1" x2="41" y2="23.167" stroke="#000000" stroke-linecap="round"></line>
+                <path fill="#000000" fill-rule="nonzero"
+                    d="M0.56 0.62Q0.94 0.38 1.42 0.38Q1.90 0.38 2.02 0.94L2.02 0.94Q2.04 3.72 2.11 9.26L2.11 9.26Q2.11 12.65 1.92 15L1.92 15Q1.87 15.36 1.48 15.64Q1.08 15.91 0.67 15.91L0.67 15.91Q0 15.91 0 15.22L0 15.22Q0.24 12.82 0.24 9.26L0.24 9.26L0.10 1.20Q0.19 0.86 0.56 0.62ZM6.46 15.24L6.46 15.24Q6.36 15.84 5.60 15.84Q4.85 15.84 4.85 15.22L4.85 15.22Q4.85 13.80 6.24 9.46L6.24 9.46Q6.86 7.46 7.63 6.14Q8.40 4.82 9.12 4.82L9.12 4.82Q9.50 4.82 9.79 5.28Q10.08 5.74 10.84 7.36Q11.59 8.98 12.10 10.79Q12.60 12.60 13.20 15.22L13.20 15.22Q13.20 15.53 12.98 15.71Q12.77 15.89 12.46 15.89L12.46 15.89Q11.69 15.89 11.50 15.22L11.50 15.22L10.66 11.93Q8.54 11.93 7.27 11.59L7.27 11.59Q6.55 14.23 6.46 15.24ZM9.05 7.03L9.05 7.03Q8.26 8.38 7.75 10.03L7.75 10.03Q8.81 10.32 10.25 10.32L10.25 10.32Q9.79 8.66 9.05 7.03ZM17.14 8.40L17.14 8.40L16.87 14.23Q16.85 15 16.82 15.26L16.82 15.26Q16.73 15.91 15.98 15.91L15.98 15.91Q15.70 15.91 15.47 15.71Q15.24 15.50 15.22 15.19L15.22 15.19Q15.41 8.95 15.41 8.46Q15.41 7.97 15.41 7.37Q15.41 6.77 15.53 6.29L15.53 6.29Q15.70 5.64 16.39 5.64L16.39 5.64Q16.73 5.64 17.23 6.10Q17.74 6.55 18.70 7.78L18.70 7.78Q20.98 10.58 22.15 13.08L22.15 13.08Q22.10 9.67 21.98 7.88Q21.86 6.10 21.86 5.93Q21.86 5.76 21.86 5.74L21.86 5.74Q22.03 4.82 22.85 4.82L22.85 4.82Q23.16 4.82 23.42 5.10Q23.69 5.38 23.69 5.78L23.69 5.78L23.81 14.71Q23.81 15.96 22.80 15.96L22.80 15.96Q22.20 15.96 21.86 15.54Q21.53 15.12 21.38 14.88Q21.24 14.64 20.95 14.11L20.95 14.11Q19.10 10.63 17.14 8.40ZM36.84 0L36.84 0Q38.40 0 39.49 0.53Q40.58 1.06 40.58 1.87L40.58 1.87Q40.58 2.23 40.40 2.50Q40.22 2.76 39.88 2.76Q39.53 2.76 38.38 2.22Q37.22 1.68 36.28 1.68Q35.33 1.68 34.32 2.28Q33.31 2.88 33.31 3.74L33.31 3.74Q33.31 4.92 34.54 5.47L34.54 5.47Q35.45 5.88 37.15 6.20Q38.86 6.53 39.94 7.52Q41.02 8.52 41.02 10.54L41.02 10.54Q41.02 13.61 39.17 15.07L39.17 15.07Q38.14 15.89 36.25 15.89Q34.37 15.89 32.50 14.86L32.50 14.86Q31.27 14.21 31.27 13.56L31.27 13.56Q31.27 13.32 31.48 13.03Q31.68 12.74 32.04 12.55Q32.40 12.36 32.70 12.49Q33 12.62 33.67 12.96Q34.34 13.30 34.66 13.42L34.66 13.42Q35.66 13.80 36.55 13.80Q37.44 13.80 38.27 12.92Q39.10 12.05 39.10 10.78L39.10 10.78Q39.10 9.10 37.42 8.42L37.42 8.42Q36.60 8.09 35.57 7.92L35.57 7.92Q33.43 7.54 32.35 6.64Q31.27 5.74 31.27 3.91Q31.27 2.09 32.83 1.04Q34.39 0 36.84 0ZM44.38 10.49L44.38 10.49L44.42 13.63Q44.42 14.26 44.40 14.30L44.40 14.30L48.55 14.23Q49.25 14.30 49.25 14.83L49.25 14.83Q49.25 15.84 48.31 15.84L48.31 15.84L43.61 15.89Q43.18 15.89 42.97 15.59Q42.77 15.29 42.74 14.95Q42.72 14.62 42.72 14.21L42.72 14.21L42.72 10.22Q42.41 10.06 42.41 9.72Q42.41 9.38 42.67 9.12L42.67 9.12Q42.60 7.25 42.60 5.71L42.60 5.71Q42.60 4.82 43.68 4.80L43.68 4.80Q43.97 4.80 44.35 4.80L44.35 4.80L48.55 4.87L48.58 4.87Q49.34 4.97 49.34 5.59L49.34 5.59Q49.34 6.07 49.06 6.24L49.06 6.24Q48.43 6.58 46.06 6.58L46.06 6.58Q45.17 6.58 44.28 6.50L44.28 6.50Q44.28 8.66 44.30 8.93L44.30 8.93Q45.24 8.95 47.98 8.95L47.98 8.95Q48.72 9.05 48.72 9.62L48.72 9.62Q48.72 9.91 48.48 10.18Q48.24 10.44 47.96 10.48Q47.69 10.51 46.79 10.51Q45.89 10.51 44.38 10.49ZM54.38 15.91L54.38 15.91L52.10 15.89Q51.50 15.89 51.43 15.53L51.43 15.53Q51.29 14.52 51.29 12.38L51.29 12.38L51.46 5.42Q51.46 4.82 52.37 4.82L52.37 4.82Q52.82 4.82 53.11 5.04Q53.40 5.26 53.40 5.64L53.40 5.64Q53.35 6.65 53.14 8.42L53.14 8.42Q52.87 10.75 52.87 11.82Q52.87 12.89 52.94 14.38L52.94 14.38L56.50 14.16Q57.29 14.16 57.29 14.98L57.29 14.98Q57.29 15.65 56.78 15.74L56.78 15.74Q55.70 15.91 54.38 15.91ZM61.58 15.91L61.58 15.91L59.30 15.89Q58.70 15.89 58.63 15.53L58.63 15.53Q58.49 14.52 58.49 12.38L58.49 12.38L58.66 5.42Q58.66 4.82 59.57 4.82L59.57 4.82Q60.02 4.82 60.31 5.04Q60.60 5.26 60.60 5.64L60.60 5.64Q60.55 6.65 60.34 8.42L60.34 8.42Q60.07 10.75 60.07 11.82Q60.07 12.89 60.14 14.38L60.14 14.38L63.70 14.16Q64.49 14.16 64.49 14.98L64.49 14.98Q64.49 15.65 63.98 15.74L63.98 15.74Q62.90 15.91 61.58 15.91ZM67.90 10.49L67.90 10.49L67.94 13.63Q67.94 14.26 67.92 14.30L67.92 14.30L72.07 14.23Q72.77 14.30 72.77 14.83L72.77 14.83Q72.77 15.84 71.83 15.84L71.83 15.84L67.13 15.89Q66.70 15.89 66.49 15.59Q66.29 15.29 66.26 14.95Q66.24 14.62 66.24 14.21L66.24 14.21L66.24 10.22Q65.93 10.06 65.93 9.72Q65.93 9.38 66.19 9.12L66.19 9.12Q66.12 7.25 66.12 5.71L66.12 5.71Q66.12 4.82 67.20 4.80L67.20 4.80Q67.49 4.80 67.87 4.80L67.87 4.80L72.07 4.87L72.10 4.87Q72.86 4.97 72.86 5.59L72.86 5.59Q72.86 6.07 72.58 6.24L72.58 6.24Q71.95 6.58 69.58 6.58L69.58 6.58Q68.69 6.58 67.80 6.50L67.80 6.50Q67.80 8.66 67.82 8.93L67.82 8.93Q68.76 8.95 71.50 8.95L71.50 8.95Q72.24 9.05 72.24 9.62L72.24 9.62Q72.24 9.91 72 10.18Q71.76 10.44 71.48 10.48Q71.21 10.51 70.31 10.51Q69.41 10.51 67.90 10.49ZM81.53 4.73L81.53 4.73Q82.15 4.80 82.15 5.30L82.15 5.30Q82.15 5.93 81.50 6.96L81.50 6.96Q81.29 7.30 80.88 7.91Q80.47 8.52 80.32 8.77Q80.16 9.02 79.81 9.50Q79.46 9.98 79.22 10.39L79.22 10.39L79.22 12.48Q79.22 14.64 79.08 15.26Q78.94 15.89 78.19 15.89L78.19 15.89Q77.98 15.89 77.88 15.79L77.88 15.79Q77.62 15.53 77.62 14.21L77.62 14.21L77.64 11.62Q77.64 10.99 77.57 10.34L77.57 10.34Q76.58 9.07 74.88 5.98L74.88 5.98Q74.81 5.86 74.81 5.69Q74.81 5.52 74.95 5.33L74.95 5.33Q75.29 4.82 75.77 4.82L75.77 4.82Q76.13 4.82 77.52 7.25L77.52 7.25Q78.14 8.33 78.46 8.78L78.46 8.78Q78.86 8.18 79.37 7.38Q79.87 6.58 80.11 6.19L80.11 6.19Q80.83 5.06 81.22 4.85L81.22 4.85Q81.38 4.73 81.53 4.73Z"
+                    transform="translate(51, 4.14)"></path>
+            </svg>
         </div>
 
         <!-- Menu button -->
@@ -62,16 +75,16 @@
 
     <!-- This line is here to make these css clases available if python uses them 
     (in '__init__.py'). If they are not here, these classes aren't defined in main.css -->
-    <div class="text-fuchsia-900 hover:text-pink-600 underline hover:no-underline"></div>
+    <div class="text-fuchsia-900 hover:text-pink-600 underline hover:no-underline hidden"></div>
 
-    <div class="mb-24">
+    <div>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
-        <div id="alert" class="alert alert-{{ category }} grid grid-cols-auto-min">
+        <div id="alert-{{loop.index}}" class="alert alert-{{ category }} grid grid-cols-auto-min">
             <div class="text-center py-5 pl-10">{{ message | safe }}</div>
             <div class="flex-center">
-                <button onclick="delete_alert()"
+                <button onclick="delete_alert('{{loop.index}}')"
                     class="w-4 mr-6 transition hover:scale-150 duration-200 ease-linear">&#10005;</button>
             </div>
         </div>
@@ -79,10 +92,10 @@
         {% endif %}
         {% endwith %}
     </div>
-    <div>{% block content %}{% endblock content %}</div>
+    <div class="mt-20">{% block content %}{% endblock content %}</div>
 
     <footer
-        class="px-6 lg:px-24 bg-coolGray-800 h-24 mt-auto flex justify-evenly items-center text-white text-xl font-thin font-montserrat">
+        class="mt-auto px-6 lg:px-24 bg-coolGray-800 h-24 flex justify-evenly items-center text-white text-xl font-thin font-montserrat">
         <div>
             <a href="https://github.com/ianselley/" class="fab fa-github"><span>GitHub</span></a>
         </div>
@@ -96,18 +109,6 @@
             <a href="https://twitter.com/iansm2001/" class="fab fa-twitter"><span>Twitter</span></a>
         </div>
     </footer>
-
-    <!-- Import jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <!-- <script>
-        const notesParent = $('#notes-parent');
-        const lastImportant = $('[important]').last();
-        console.log(notesParent.children('[important]').last());
-        console.log(lastImportant);
-        if (notesParent.children('[important]').last() !== lastImportant) {
-            lastImportant.after('<hr style="position: relative; top: 1px; border: 1px solid rgba(0, 0, 0, 0.5);">');
-        }
-    </script> -->
 </body>
 
 </html>

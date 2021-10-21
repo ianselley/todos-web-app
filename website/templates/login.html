@@ -6,14 +6,14 @@
 
 <div class="flex justify-center">
     <div class="no-card sm:card">
-        <form method="POST">
-            <h2 class="text-center text-2xl font-medium">Log into your account</h2>
+        <form method="POST" class="form-padding">
+            <h2 class="text-center text-2xl font-medium mb-4">Log into your account</h2>
             <div class="">
                 <label for="username">Username:</label>
                 <!-- el for="username" hace referencia al id="username" de abajo -->
                 <div class="logo-input">
                     <span id="username-prepend" class="logo">
-                        <i class="material-icons">person_outline</i>
+                        <em class="material-icons">person_outline</em>
                     </span>
                     <input type="username" class="form" id="username" name="username" autocapitalize="none"
                         placeholder="Write your username" autofocus required autocomplete="username">
@@ -23,7 +23,7 @@
                 <label for="password">Password:</label>
                 <div class="logo-input">
                     <span class="logo">
-                        <i class="material-icons">password</i>
+                        <em class="material-icons">password</em>
                     </span>
                     <input type="password" class="form eye" id="password" name="password" autocapitalize="none"
                         placeholder="Write your password" required autocomplete="current-password">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div>
-                <button class="mt-4 btn-form" type="submit">LOG IN</button>
+                <button class="mt-4 btn-form w-full" type="submit">LOG IN</button>
             </div>
         </form>
     </div>

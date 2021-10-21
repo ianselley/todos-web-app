@@ -6,14 +6,13 @@
 
 <div class="flex justify-center">
     <div class="no-card sm:card">
-        <form method="POST">
-            <h2 class="text-center text-2xl font-medium">Sign up and start writing TO-DO's</h2>
+        <h2 class="text-center text-2xl font-medium mb-4">Sign up and start writing TO-DO's</h2>
+        <form method="POST" class="form-padding">
             <div class="">
                 <label for="username">Username:</label>
-                <!-- el for="username" hace referencia al id="username" de abajo -->
                 <div class="logo-input">
                     <span id="username-prepend" class="logo">
-                        <i class="material-icons">person_outline</i>
+                        <em class="material-icons">person_outline</em>
                     </span>
                     <input type="username" class="form" id="username" name="username" autocapitalize="none"
                         placeholder="Write your username" autofocus required minlength="1" autocomplete="username">
@@ -23,7 +22,7 @@
                 <label for="password">Password:</label>
                 <div class="logo-input">
                     <span class="logo">
-                        <i class="material-icons">password</i>
+                        <em class="material-icons">password</em>
                     </span>
                     <input type="password" class="form eye" id="password" name="password" autocapitalize="none"
                         placeholder="Write a password" required minlength=8" autocomplete="new-password">
@@ -45,10 +44,10 @@
                 <label for="direct-login">Log in automatically</label>
             </div>
             <div>
-                <button class="btn-form" type="submit">SIGN UP</button>
+                <button class="btn-form w-full" type="submit">SIGN UP</button>
             </div>
         </form>
     </div>
 </div>
-
+<script>$('#username').focus()</script>
 {% endblock content %}
