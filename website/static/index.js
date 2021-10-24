@@ -2,7 +2,8 @@ let scrollpos = localStorage.getItem("scrollpos");
 if (scrollpos) window.scrollTo(0, scrollpos); // This if statement can be modified to not scroll in some cases, but I don't know how to do it
 // I may have to group all this into one function and call the fuction with a boolean parameter to determine wether or not I want to go to the beggining of the page
 window.addEventListener("beforeunload", function (e) {
-  localStorage.setItem("scrollpos", window.scrollY);
+  let top = window.pageYOffset || document.documentElement.scrollTop;
+  localStorage.setItem("scrollpos", top);
 });
 
 function edit_category(id, name) {
@@ -12,15 +13,9 @@ function edit_category(id, name) {
   $(`#content-${id}`).val(name);
 }
 
-function edit_note(id, content) {
-  $(`#text-plus-logo-${id}`).toggleClass("hidden");
-  $(`#edit-${id}`).toggleClass("hidden");
-  $(`#edit-button-${id}`).toggleClass("hidden");
-  $(`#content-${id}`).focus();
-  $(`#content-${id}`).val(content);
-}
+function edit_note(id, content) {}
 
-function change_note(id, content) {
+function save_note_content_changes(id, content) {
   $(`#text-plus-logo-${id}`).toggleClass("hidden");
   $(`#edit-${id}`).toggleClass("hidden");
   $(`#edit-button-${id}`).toggleClass("hidden");
@@ -44,16 +39,19 @@ function fetch_reload(url_, id_) {
   });
 }
 
-function show_modal(id_) {
-  $(`#modal-container-${id_}`).toggleClass("show-modal");
+function show_modal(id, content) {
+  $(`#modal-container-${id}`).toggleClass("show-modal");
+  $(`#content-${id}`).focus();
+  $(`#content-${id}`).val(content);
 }
 
-function apply_changes(id, content, details, expires) {
+function apply_changes(id, content, category_id, details, expires) {
   fetch("/edit-note", {
     method: "POST",
     body: JSON.stringify({
       id: id,
       content: content,
+      category_id: category_id,
       details: details,
       expires: expires,
     }),
@@ -61,6 +59,20 @@ function apply_changes(id, content, details, expires) {
     window.location.reload();
   });
 }
+
+let today = new Date().toLocaleDateString();
+
+document.querySelectorAll("[note-expires]").forEach((element) => {
+  let element_date = element.getAttribute("note-expires");
+  if (element_date !== "None" && element.getAttribute("complete") == null) {
+    let date = new Date(element_date).toLocaleDateString();
+    if (today > date) {
+      element.classList.add("note-expired");
+    } else if (today == date) {
+      element.classList.add("expires-today");
+    }
+  }
+});
 
 // Sección para ver/no ver la contraseña
 
@@ -74,14 +86,4 @@ function apply_changes(id, content, details, expires) {
 //   password.setAttribute("type", type);
 //   // toggle the eye slash icon
 //   this.classList.toggle("fa-eye-slash");
-// });
-
-// $("#toggle-pwd").click(function () {
-//   $(this).toggleClass("fa-eye fa-eye-slash");
-//   var input = $($(this).attr("toggle"));
-//   if (input.attr("type") == "password") {
-//     input.attr("type", "text");
-//   } else {
-//     input.attr("type", "password");
-//   }
 // });

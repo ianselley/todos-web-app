@@ -6,17 +6,16 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  overflow-x: hidden;
-}
-
 input,
 textarea,
 button,
 select,
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+textarea {
+  @apply outline-none border-2 border-gray-300 focus:border-blue-300 rounded-md px-3 py-2 min-h-[45px] max-h-44 max-w-[95vw];
 }
 
 .md-16 {
@@ -32,10 +31,6 @@ a {
   .flex-center {
     @apply flex justify-center items-center;
   }
-}
-
-nav img {
-  @apply w-36 h-auto;
 }
 
 #nav-items a,
@@ -85,7 +80,8 @@ nav img {
   @apply flex-center px-2 rounded-l-md;
 }
 
-input {
+input,
+select {
   @apply focus:outline-none py-2 px-3 focus:ring-blue-300 focus:ring-2;
 }
 
@@ -109,8 +105,17 @@ form ~ ul {
   @apply mb-4;
 } */
 
-.complete {
+[complete] {
   @apply line-through text-gray-400;
+}
+
+.expires-today {
+  /* -yellow-700 */
+  @apply text-amber-600  text-opacity-90;
+}
+
+.note-expired {
+  @apply text-rose-600;
 }
 
 .show-modal {
@@ -125,7 +130,7 @@ form ~ ul {
 
 .btn-form {
   @apply h-12 bg-green-500 rounded-full text-white font-bold text-xl shadow-lg;
-  @apply hover:shadow-xl transition-all duration-200 ease-in-out; /* mb-48 sm:mb-0  */
+  @apply hover:shadow-xl hover:bg-green-600 hover:bg-opacity-90 transition-all duration-300 ease-in-out; /* mb-48 sm:mb-0  */
 }
 
 footer span {
