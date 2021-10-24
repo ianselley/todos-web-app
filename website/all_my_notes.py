@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, flash, jsonify
+from flask import Blueprint, render_template, redirect, request, flash, jsonify, url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -6,6 +6,8 @@ import json
 
 
 all_my_notes = Blueprint("all_my_notes", __name__)
+
+not_allowed = "You are not allowed to modify this note!"
 
 
 @all_my_notes.route("/all-my-notes", methods=["GET"])
@@ -16,30 +18,24 @@ def get():
 
 @all_my_notes.route("/all-check-note", methods=["POST"])
 @login_required
-def check_note(note_id):
+def check_note():
     data = json.loads(request.data)
     note_id = data["id_"]
     note = Note.query.filter_by(id=note_id)
-    if note:
-        if note.user_id != current_user.id:
-            flash("You are not allowed to modify this note!", category="error")
-            return redirect("/all-my-notes")
-        note.complete = not note.complete
-        db.session.commit()
-    else:
-        flash("That note does not exist any more", category="error")
-    return jsonify({})
+    if note and note.user_id != current_user.id:
+        flash(not_allowed, category="error")
+        return redirect(url_for(".get"))
 
 
 @all_my_notes.route("/all-delete-note", methods=["POST"])
 @login_required
-def delete_note(note_id):
+def delete_note():
     data = json.loads(request.data)
     note_id = data["id_"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
-            flash("You are not allowed to modify this note!", category="error")
+            flash(not_allowed, category="error")
             return redirect("/all-my-notes")
         else:
             db.session.delete(note)
@@ -49,7 +45,7 @@ def delete_note(note_id):
 
 @all_my_notes.route("/all-edit-note", methods=["POST"])
 @login_required
-def edit_note(note_id):
+def edit_note():
     data = json.loads(request.data)
     note_id = data["id_"]
     note = Note.query.filter_by(id=note_id).first()

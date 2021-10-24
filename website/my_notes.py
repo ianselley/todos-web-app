@@ -69,6 +69,7 @@ def edit_note():
     data = json.loads(request.data)
     note_id = data["id"]
     note_content = data["content"]
+    note_category_id = data["category_id"]
     note_details = data["details"]
     note_expires = data["expires"]
     note = Note.query.filter_by(id=note_id).first()
@@ -77,8 +78,9 @@ def edit_note():
             flash(not_allowed, category="error")
             return redirect(f"/my-notes/{note.category_id}")
         note.content = note_content
+        note.category_id = note_category_id
         note.details = note_details
-        if note.expires:
+        if note_expires:
             note.expires = date(*map(int, note_expires.split("-")))
         db.session.commit()
     else:
