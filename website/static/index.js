@@ -1,25 +1,8 @@
-let scrollpos = localStorage.getItem("scrollpos");
-if (scrollpos) window.scrollTo(0, scrollpos); // This if statement can be modified to not scroll in some cases, but I don't know how to do it
-// I may have to group all this into one function and call the fuction with a boolean parameter to determine wether or not I want to go to the beggining of the page
-window.addEventListener("beforeunload", function (e) {
-  let top = window.pageYOffset || document.documentElement.scrollTop;
-  localStorage.setItem("scrollpos", top);
-});
-
 function edit_category(id, name) {
   $(`#text-plus-logo-${id}`).toggleClass("hidden");
   $(`#edit-${id}`).toggleClass("hidden");
   $(`#content-${id}`).focus();
   $(`#content-${id}`).val(name);
-}
-
-function edit_note(id, content) {}
-
-function save_note_content_changes(id, content) {
-  $(`#text-plus-logo-${id}`).toggleClass("hidden");
-  $(`#edit-${id}`).toggleClass("hidden");
-  $(`#edit-button-${id}`).toggleClass("hidden");
-  $(`#modal-title-${id}`).text(content);
 }
 
 function delete_alert(index) {
@@ -30,10 +13,10 @@ function toggle_nav_items() {
   $("#nav-items").toggleClass("hidden");
 }
 
-function fetch_reload(url_, id_) {
-  fetch(url_, {
+function fetch_reload(url, id) {
+  fetch(url, {
     method: "POST",
-    body: JSON.stringify({ id_: id_ }),
+    body: JSON.stringify({ id: id }),
   }).then((_res) => {
     window.location.reload();
   });
@@ -60,6 +43,25 @@ function apply_changes(id, content, category_id, details, expires) {
   });
 }
 
+// Section to handle state of mobile menu options
+document.addEventListener("click", (e) => {
+  const isDropdownButton = e.target.matches("[mobile-options-button]");
+
+  if (!isDropdownButton && e.target.closest("[mobile-options]") != null) return;
+
+  let currentMenu;
+  if (isDropdownButton) {
+    currentMenu = e.target.closest("[mobile-options]");
+    currentMenu.classList.toggle("active");
+  }
+
+  document.querySelectorAll("[mobile-options].active").forEach((menu) => {
+    if (menu === currentMenu) return;
+    menu.classList.remove("active");
+  });
+});
+
+// Section to handle coloring of notes relative to the expiring date and current date
 let today = new Date().toLocaleDateString();
 
 document.querySelectorAll("[note-expires]").forEach((element) => {
@@ -74,16 +76,51 @@ document.querySelectorAll("[note-expires]").forEach((element) => {
   }
 });
 
-// Sección para ver/no ver la contraseña
+// Section to toggle password visibility
+const togglePassword = document.querySelector("#toggle-pwd");
+const togglePasswordConfirm = document.querySelector("#toggle-pwd-confirm");
+const password = document.querySelector("#password");
+const passwordConfirm = document.querySelector("#password-confirm");
 
-// const togglePassword = document.querySelector("#toggle-pwd");
-// const password = document.querySelector("#password");
+function togglePwd(element, eye) {
+  // toggle the type attribute
+  const type =
+    element.getAttribute("type") === "password" ? "text" : "password";
+  element.setAttribute("type", type);
+  // toggle the eye slash icon
+  eye.classList.toggle("fa-eye-slash");
+}
 
-// togglePassword.addEventListener("click", function (e) {
-//   // toggle the type attribute
-//   const type =
-//     password.getAttribute("type") === "password" ? "text" : "password";
-//   password.setAttribute("type", type);
-//   // toggle the eye slash icon
-//   this.classList.toggle("fa-eye-slash");
-// });
+if (togglePassword) {
+  togglePassword.addEventListener("click", function () {
+    togglePwd(password, togglePassword);
+  });
+}
+
+if (togglePasswordConfirm) {
+  togglePasswordConfirm.addEventListener("click", function () {
+    togglePwd(passwordConfirm, togglePasswordConfirm);
+  });
+}
+
+// Section to handle the scroll
+let scrollpos = localStorage.getItem("scrollpos");
+let previousPath = localStorage.getItem("previousPath");
+let newPath = window.location.pathname;
+let alert = document.querySelector(".alert");
+
+if (scrollpos) {
+  window.scrollTo(0, scrollpos);
+}
+
+window.addEventListener("beforeunload", function () {
+  let before = window.location.pathname;
+  let top;
+  if (alert || previousPath !== newPath) {
+    top = 0;
+  } else {
+    top = window.pageYOffset || document.documentElement.scrollTop;
+  }
+  localStorage.setItem("scrollpos", top);
+  localStorage.setItem("previousPath", before);
+});
