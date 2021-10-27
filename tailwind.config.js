@@ -6,12 +6,16 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class' or 'false'
   theme: {
     extend: {
+      inset: {
+        1.25: "calc(100% + 1rem)",
+      },
       transitionDuration: {
         400: "400ms",
       },
       gridTemplateColumns: {
         "auto-min": "auto min-content",
         "min-auto": "min-content auto",
+        "min-auto-min": "min-content auto min-content",
         "txt-x": "auto 1.5rem",
       },
       lineHeight: {

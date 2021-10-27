@@ -18,7 +18,7 @@ def get():
 @login_required
 def post_category():
     data = json.loads(request.data)
-    name = data["id_"]
+    name = data["id"]
     categories = Category.query.filter_by(user_id=current_user.id).all()
     if name in [category.name for category in categories]:
         flash("That category already exists", category="error")
@@ -33,7 +33,7 @@ def post_category():
 @login_required
 def delete_category():
     data = json.loads(request.data)
-    category_id = data["id_"]
+    category_id = data["id"]
     category = Category.query.filter_by(id=category_id).first()
     notes = Note.query.filter_by(category_id=category_id).all()
     if category:

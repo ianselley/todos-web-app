@@ -6,7 +6,7 @@
 
 <h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">{{category.name}}</h1>
 
-<div class="flex justify-center">
+<div class="flex justify-center no-overflow">
     <div class="no-card sm:card lg:w-160">
         {% if category %}
         <form action="/post-note/{{category.id}}" method="POST">
@@ -52,15 +52,14 @@
                             </em>
                         </button>
                     </div>
-                    <div class="flex justify-between w-full">
-                        <!-- Take a look at this, in particular the grid system -->
+                    <div class="w-full flex justify-between relative">
                         <div class="ml-3 grid grid-cols-auto-min">
-                            <span name="note-content" note-expires="{{note.expires}}" class="no-overflow" {% if
-                                note.complete %} complete {% endif %}>
+                            <span name="note-content" id="note-content-{{note.id}}" note-expires="{{note.expires}}"
+                                class="no-overflow" {% if note.complete %} complete {% endif %}>
                                 {{note.content}}
                             </span>
-                            <div class="sm:hidden flex items-center">
-                                <button class="ml-2 flex items-center" onclick="$(this).next().toggleClass('hidden')">
+                            <div class="sm:hidden flex items-center" mobile-options>
+                                <button class="ml-2 flex items-center" mobile-options-button>
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         aria-hidden="true" role="img" width="1em" height="1em"
                                         preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
@@ -70,7 +69,8 @@
                                         </g>
                                     </svg>
                                 </button>
-                                <ul class="w-40 p-4 hidden relative bg-white rounded space-y-3">
+                                <ul id="mobile-options-{{note.id}}"
+                                    class="mobile-options-menu w-40 p-4 bg-white rounded space-y-3 hidden z-10 absolute top-1.25 -right-3">
                                     <li>
                                         <button class="flex" onclick="fetch_reload('/check-note', '{{note.id}}');">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem"
@@ -98,7 +98,8 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="flex items-center" onclick="show_modal('{{note.id}}', '{{note.content}}')">
+                                        <button class="flex items-center"
+                                            onclick="show_modal('{{note.id}}',  $('#note-content-{{note.id}}').text().trim())">
                                             <svg xmlns=" http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem"
                                                 fill="currentColor" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -109,7 +110,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <button class="ml-3 hidden sm:flex sm:items-center" onclick="show_modal('{{note.id}}', '{{note.content}}')">
+                            <button class="ml-3 hidden sm:flex sm:items-center"
+                                onclick="show_modal('{{note.id}}', $('#note-content-{{note.id}}').text().trim())">
                                 <svg xmlns=" http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem"
                                     fill="currentColor" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
@@ -126,32 +128,35 @@
                     </div>
                 </div>
             </li>
-            <div id="modal-container-{{note.id}}"
+            <div id="modal-container-{{note.id}}" onclick="window.location.reload();"
                 class="hidden w-full h-screen pointer-events-none bg-black bg-opacity-20">
-                <div id="modal-{{note.id}}"
+                <div id="modal-{{note.id}}" onclick="event.stopPropagation();"
                     class="w-full sm:w-3/4 h-screen max-h-screen sm:h-[auto] bg-warmGray-50 sm:rounded-xl shadow-xl p-6 flex flex-col items-center justify-center">
                     <label for="content-{{note.id}}">Edit note's content</label>
-                    <textarea id="content-{{note.id}}" name="content-{{note.id}}"
-                        placeholder="Note" class="mt-2 w-72 sm:w-3/4"></textarea>
+                    <textarea id="content-{{note.id}}" name="content-{{note.id}}" placeholder="Note"></textarea>
                     <label for="change-category-{{note.id}}" class="mt-6">Change the note's category</label>
-                    <select name="change-category-{{note.id}}" id="change-category-{{note.id}}" class="mt-2 rounded">
+                    <select name="change-category-{{note.id}}" id="change-category-{{note.id}}"
+                        class="mt-2 rounded w-40">
                         {% for category in user.categories %}
-                            <option value="{{category.id}}" {% if category.id == note.category_id %} selected {% endif %} >{{category.name}}</option>
+                        <option value="{{category.id}}" {% if category.id==note.category_id %} selected {% endif %}>
+                            {{category.name}}</option>
                         {% endfor %}
                     </select>
-                    <label for="note-details-{{note.id}}" class="mt-4">Add a note description:</label>
-                    <textarea placeholder="Write here anything you want to add to your note" class="mt-2 w-72 sm:w-3/4"
+                    <label for="note-details-{{note.id}}" class="mt-6">Add a note description:</label>
+                    <textarea placeholder="Write here anything you want to add to your note"
                         id="note-details-{{note.id}}">{% if note.details %}{{note.details}}{% endif %}</textarea>
                     <label for="note-expires-{{note.id}}" class="mt-6 text-center">Enter an expiring date for this
                         note (Optional)
                     </label>
-                    <input id="note-expires-{{note.id}}" type="date" class="mt-2 w-auto"
+                    <input id="note-expires-{{note.id}}" type="date" class="mt-2 w-48"
                         value="{% if note.expires %}{{note.expires}}{% endif %}">
                     <div class="w-full flex justify-around">
-                        <button class="mt-6 w-1/3 btn-form" type="submit"
-                            onclick="apply_changes('{{note.id}}', $('#content-{{note.id}}').val(), $('#change-category-{{note.id}}').val(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">
-                            Apply
-                        </button>
+                        <form id="submit-apply-changes-{{note.id}}" class="mt-6 w-1/3 "
+                            onsubmit="return apply_changes('{{note.id}}', $('#content-{{note.id}}').val(), $('#change-category-{{note.id}}').val(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">
+                            <button id="apply-changes-{{note.id}}" class="btn-form w-full" type="submit">
+                                Apply
+                            </button>
+                        </form>
                         <button class="mt-6 w-1/3 btn-form" onclick="window.location.reload();">
                             Cancel
                         </button>

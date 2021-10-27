@@ -15,7 +15,19 @@ a {
 }
 
 textarea {
-  @apply outline-none border-2 border-gray-300 focus:border-blue-300 rounded-md px-3 py-2 min-h-[45px] max-h-44 max-w-[95vw];
+  @apply mt-2 py-2 px-3 w-[290px] sm:w-3/4 min-h-[45px] max-h-44 max-w-[95vw];
+  @apply outline-none border-2 border-gray-300 focus:border-blue-300;
+  @apply rounded-md;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+svg,
+path {
+  pointer-events: none;
 }
 
 .md-16 {
@@ -72,7 +84,7 @@ textarea {
 }
 
 .logo-input {
-  @apply mt-2 grid grid-cols-min-auto bg-warmGray-200 rounded-md ring-gray-300 ring-1;
+  @apply mt-2 grid grid-cols-min-auto-min bg-warmGray-200 rounded-md ring-gray-300 ring-1;
   @apply shadow-md;
 }
 
@@ -85,7 +97,8 @@ select {
   @apply focus:outline-none py-2 px-3 focus:ring-blue-300 focus:ring-2;
 }
 
-input:not(.form) {
+input:not(.form),
+select {
   @apply ring-gray-300 ring-1 shadow-md rounded-md focus:ring-blue-300 focus:ring-2;
 }
 
@@ -93,17 +106,9 @@ input.form {
   @apply rounded-r-md;
 }
 
-.eye::after {
-  /* Añadir el ojo para las contraseñas */
-}
-
 form ~ ul {
   @apply pt-6;
 }
-
-/* li:last-child:not(:first-child) {
-  @apply mb-4;
-} */
 
 [complete] {
   @apply line-through text-gray-400;
@@ -116,6 +121,10 @@ form ~ ul {
 
 .note-expired {
   @apply text-rose-600;
+}
+
+[mobile-options].active > button + .mobile-options-menu {
+  display: block;
 }
 
 .show-modal {

@@ -32,7 +32,7 @@ def post_note(category_id):
 @login_required
 def check_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
@@ -50,7 +50,7 @@ def check_note():
 @login_required
 def delete_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
@@ -82,6 +82,8 @@ def edit_note():
         note.details = note_details
         if note_expires:
             note.expires = date(*map(int, note_expires.split("-")))
+        elif note_expires == "":
+            note.expires = None
         db.session.commit()
     else:
         flash("That note does not exist", category="error")
@@ -92,7 +94,7 @@ def edit_note():
 @login_required
 def toggle_important():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:

@@ -20,7 +20,7 @@ def get():
 @login_required
 def check_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id)
     if note and note.user_id != current_user.id:
         flash(not_allowed, category="error")
@@ -31,7 +31,7 @@ def check_note():
 @login_required
 def delete_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
@@ -47,7 +47,7 @@ def delete_note():
 @login_required
 def edit_note():
     data = json.loads(request.data)
-    note_id = data["id_"]
+    note_id = data["id"]
     note = Note.query.filter_by(id=note_id).first()
     if note:
         if note.user_id != current_user.id:
