@@ -1,18 +1,24 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from os import path
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
+
+
+def page_not_found(e):
+    return render_template("404.html", user=current_user), 404
 
 
 def create_app():
     app = Flask(__name__)
     app.static_folder = "static"
     app.config["SECRET_KEY"] = "ian"
+    app.register_error_handler(404, page_not_found)
     # To not show notifications every time main.py gets executed
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     db.init_app(app)
 

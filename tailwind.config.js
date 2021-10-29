@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       inset: {
-        1.25: "calc(100% + 1rem)",
+        "1+1": "calc(100% + 1rem)",
+        "1+2.5": "calc(100% + 2.5rem)",
       },
       transitionDuration: {
         400: "400ms",
