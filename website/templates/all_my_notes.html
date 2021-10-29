@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %} {{ super() }} {% endblock title %}
 
@@ -8,57 +9,11 @@
 <div class="flex justify-center">
     <div class="no-card sm:card lg:w-160">
         {% if user.notes %}
-        <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50" id="notes-parent">
-            {% for important in [true, false] %}
-
-            <!-- In the first iteration it will show the impotant notes, and in the seccond the not important ones -->
-            {% for note in user.notes %}
-            {% if note.important == important %}
-            <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}" {% if important %} important {% endif %}>
-                <div class="flex items-center">
-                    <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
-                        <button class="mr-1 sm:mr-2" onclick="fetch_reload('/check-note', '{{note.id}}');">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
-                                class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                <path
-                                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                <path
-                                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                            </svg>
-                        </button>
-                        <button onclick="fetch_reload('/delete-note', '{{note.id}}');">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
-                                class="bi bi-x-square" viewBox="0 0 16 16">
-                                <path
-                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="ml-3 grid grid-cols-auto-min w-full">
-                        <span class="no-overflow {% if note.complete == 1 %} complete {% endif %}">
-                            {{note.content}}
-                        </span>
-                        <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
-                            <em
-                                class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
-                            </em>
-                        </button>
-                    </div>
-                </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-
-        </ul>
+        {{ macros.notes(user, category_id_list) }}
         {% else %}
-        <div class="text-center">You don't have any notes to view. <br>
-            <a href="/my-categories" class="text-fuchsia-900 hover:text-indigo-700 underline hover:no-underline">Add a
-                category</a> if you haven't already, and in side it add a note. <br>
+        <div class="text-center">You don't have any notes to view.<br><br>
+            <a href="/my-categories" class="text-fuchsia-900 hover:text-indigo-700 underline hover:no-underline">
+                Add a category</a> if you haven't already, and in side it add a note.<br>
             Then come here to see it.
         </div>
         {% endif %}

@@ -15,7 +15,9 @@ not_allowed = "You are not allowed to modify this note!"
 @login_required
 def get(category_id):
     category = Category.query.filter_by(id=category_id).first()
-    return render_template("my_notes.html", category=category, user=current_user)
+    if category and category in current_user.categories:
+        return render_template("my_notes.html", category=category, user=current_user)
+    return render_template("404.html", user=current_user), 404
 
 
 @my_notes.route("/post-note/<category_id>", methods=["POST"])

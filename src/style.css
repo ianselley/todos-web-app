@@ -15,9 +15,37 @@ a {
 }
 
 textarea {
-  @apply mt-2 py-2 px-3 w-[290px] sm:w-3/4 min-h-[45px] max-h-44 max-w-[95vw];
+  @apply mt-2 py-2 px-3 min-h-[45px] h-[88px] max-h-40 w-full;
   @apply outline-none border-2 border-gray-300 focus:border-blue-300;
   @apply rounded-md;
+}
+
+textarea {
+  position: relative;
+  z-index: 1;
+}
+
+.wrap {
+  @apply w-[290px] sm:w-3/4 max-w-[95vw];
+  position: relative;
+  display: inline-block;
+}
+
+.pull-tab {
+  --border-width: 12px;
+  --border-color: gray;
+  height: 0px;
+  width: 0px;
+  border-right: var(--border-width) solid var(--border-color);
+  border-bottom: var(--border-width) solid var(--border-color);
+  border-top: var(--border-width) solid transparent;
+  border-left: var(--border-width) solid transparent;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 7px;
+  right: 0px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 input::-ms-reveal,
@@ -45,7 +73,13 @@ path {
   }
 }
 
-#nav-items a,
+@media (max-width: 768px) {
+  #nav-items li:not(.no-margin-right) {
+    @apply mr-8 sm:mr-12;
+  }
+}
+
+#nav-items li > a,
 #nav-items button {
   @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
   white-space: nowrap;
@@ -123,7 +157,7 @@ form ~ ul {
   @apply text-rose-600;
 }
 
-[mobile-options].active > button + .mobile-options-menu {
+[mobile-options].active > [mobile-options-button] + [mobile-options-menu] {
   display: block;
 }
 
