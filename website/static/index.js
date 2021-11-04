@@ -39,7 +39,7 @@ function apply_changes(id, content, category_id, details, expires) {
       expires: expires,
     }),
   }).then((_res) => {
-    window.location.reload();
+    location.reload(true);
   });
 }
 

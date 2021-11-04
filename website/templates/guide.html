@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %} {{ super() }} {% endblock title %}
+
+{% block content %}
+
+<div class="flex-center flex-col mb-40">
+    <h2 class="text-3xl font-medium mb-12 text-center">Welcome to my TO-DO's web app!</h2>
+    <div class="text-lg w-4/5 sm:w-3/4 max-w-[52rem]">
+        <p>This is a productivity web where you can create notes (also called TO-DO's) and group them in categories.</p>
+        <p>Each note can have a description, an expiring date and even be marked as important.</p>
+        <p>Here you will learn how to use and move through this website.</p><br>
+        <p>First of all you have to <a href="/sign-up" class="link">create a new account</a>. There you will have
+            the option to log in automatically.</p>
+        <p>If you uncheck that option, you will need to <a href="/login" class="link">log into</a> the account you've
+            just created.</p><br>
+        <p>Once logged in you will be on the <a href="/my-categories" class="link">My Categories</a> section, where you
+            can add as many categories as you want.</p>
+        <p>
+            After creating a new category you will be able to:
+        <ul>
+            <li>
+                &emsp;· Delete it (and all of its notes) by clicking on
+                <svg class="inline ml-1" xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="red"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </li>
+            <li>
+                &emsp;· Edit it's name by clicking on
+                <svg class="inline ml-1" xmlns="http://www.w3.org/2000/svg" width="1.15rem" fill="#f59f0b"
+                    height="1.15rem" viewBox="0 0 16 16">
+                    <path
+                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                </svg>
+            </li>
+            <li>
+                &emsp;· Open it by clicking on
+                <svg class="mx-1 inline" xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem"
+                    fill="black" fill-opacity="0.7" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                    <path fill-rule="evenodd"
+                        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                </svg>, where you'll be able to write and view all of its notes.
+            </li>
+        </ul>
+        </p><br>
+        <p>Now, inside any category, after writing your first note, you will be able to:
+        <ul>
+            <li>
+                &emsp;· Check a note when you have completed it by
+                <span class="sm:hidden">firstly</span> clicking on
+                <div class="sm:hidden inline">
+                    <svg class="inline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" width="1.15rem" height="1.15rem"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                        <g fill="currentColor">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z" />
+                        </g>
+                    </svg>
+                    and then
+                </div>
+                <svg class="inline ml-1" xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem"
+                    fill="green" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                    <path
+                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                    <path
+                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                </svg>
+            </li>
+            <li>
+                &emsp;· Delete it by
+                <span class="sm:hidden">firstly</span> clicking on
+                <div class="sm:hidden inline">
+                    <svg class="inline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" width="1.15rem" height="1.15rem"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                        <g fill="currentColor">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z" />
+                        </g>
+                    </svg>
+                    and then
+                </div>
+                <svg class="inline ml-1" xmlns="http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem" fill="red"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </li>
+            <li>
+                &emsp;· Expand it to see more details by
+                <span class="sm:hidden">firstly</span> clicking on
+                <div class="sm:hidden inline">
+                    <svg class="inline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" width="1.15rem" height="1.15rem"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                        <g fill="currentColor">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z" />
+                        </g>
+                    </svg>
+                    and then
+                </div>
+                <svg class="ml-2 inline" xmlns=" http://www.w3.org/2000/svg" width="1.15rem" height="1.15rem"
+                    fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
+                </svg>
+            </li>
+            <li>
+                &emsp;· Mark it as important by clicking on <em class="far fa-star text-amber-500 fa-md"></em>
+            </li>
+        </ul>
+        </p><br>
+        <p>The previous four actions are also avilable in the <a href="/all-my-notes" class="link">All My Notes</a>
+            section, where you can view and edit all the notes of all your categories.</p>
+    </div>
+</div>
+
+{% endblock content %}
