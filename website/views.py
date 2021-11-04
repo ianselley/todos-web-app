@@ -6,10 +6,12 @@ views = Blueprint("views", __name__)
 
 
 @views.route("/")
-def redirect_to_manual():
-    return redirect(url_for("views.manual"))
+def redirect_to():
+    if current_user.is_authenticated:
+        return redirect(url_for("my_categories.get"))
+    return redirect(url_for("views.guide"))
 
 
-@views.route("/manual")
-def manual():
-    return render_template("manual.html", user=current_user)
+@views.route("/guide")
+def guide():
+    return render_template("guide.html", user=current_user)

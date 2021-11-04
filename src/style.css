@@ -15,12 +15,10 @@ a {
 }
 
 textarea {
+  outline: none !important;
   @apply mt-2 py-2 px-3 min-h-[45px] h-[88px] max-h-40 w-full;
-  @apply outline-none border-2 border-gray-300 focus:border-blue-300;
+  @apply border-2 border-gray-300 focus:border-blue-300;
   @apply rounded-md;
-}
-
-textarea {
   position: relative;
   z-index: 1;
 }
@@ -40,12 +38,19 @@ textarea {
   border-bottom: var(--border-width) solid var(--border-color);
   border-top: var(--border-width) solid transparent;
   border-left: var(--border-width) solid transparent;
-  border-radius: 6px;
+  border-radius: 6px 0;
   position: absolute;
   bottom: 7px;
   right: 0px;
   pointer-events: none;
   z-index: 2;
+}
+
+// This targets Firefox only
+@-moz-document url-prefix() {
+  .pull-tab {
+    bottom: 2px;
+  }
 }
 
 input::-ms-reveal,
@@ -73,15 +78,9 @@ path {
   }
 }
 
-@media (max-width: 768px) {
-  #nav-items li:not(.no-margin-right) {
-    @apply mr-8 sm:mr-12;
-  }
-}
-
 #nav-items li > a,
 #nav-items button {
-  @apply py-2 block w-full text-center md:p-0 md:mx-4 text-gray-700 hover:text-indigo-500;
+  @apply p-0 mx-4 w-full mt-6 sm:mt-0 block text-center text-gray-700 hover:text-indigo-500;
   white-space: nowrap;
 }
 
@@ -101,6 +100,14 @@ path {
   @apply bg-red-400 bg-opacity-30 border-red-600 text-red-900;
 }
 
+.alert-link {
+  @apply text-fuchsia-900 hover:text-pink-600 underline hover:no-underline;
+}
+
+.link {
+  @apply text-yellow-600 hover:text-blue-700 underline hover:no-underline;
+}
+
 @responsive {
   .card {
     @apply bg-warmGray-50 rounded-xl shadow-xl p-6 mt-10 mb-48 w-120;
@@ -109,8 +116,12 @@ path {
 
 @responsive {
   .no-card {
-    @apply mb-48 w-72 mt-10;
+    @apply mb-48 w-2/3 min-w-[18rem] mt-10;
   }
+}
+
+.main-content {
+  @apply no-card sm:card lg:w-160;
 }
 
 .form-padding > div:not(:last-child) {
@@ -138,6 +149,15 @@ select {
 
 input.form {
   @apply rounded-r-md;
+}
+
+// This targets Safari only
+@media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+  @media {
+    .fa-eye .fa-eye-slash {
+      @apply -left-32;
+    }
+  }
 }
 
 form ~ ul {

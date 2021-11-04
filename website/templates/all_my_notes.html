@@ -7,12 +7,12 @@
 
 <h1 class="text-center text-6xl font-medium font-oleoScript no-overflow leading-tight">All my to-do's</h1>
 <div class="flex justify-center">
-    <div class="no-card sm:card lg:w-160">
+    <div class="main-content">
         {% if user.notes %}
         {{ macros.notes(user, category_id_list) }}
         {% else %}
         <div class="text-center">You don't have any notes to view.<br><br>
-            <a href="/my-categories" class="text-fuchsia-900 hover:text-indigo-700 underline hover:no-underline">
+            <a href="/my-categories" class="link">
                 Add a category</a> if you haven't already, and in side it add a note.<br>
             Then come here to see it.
         </div>

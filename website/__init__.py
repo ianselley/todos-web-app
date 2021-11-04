@@ -25,7 +25,7 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = "auth.sign_up"
-    login_link = '<a href="/login" class="text-fuchsia-900 hover:text-pink-600 underline hover:no-underline">log in</a>'
+    login_link = '<a href="/login" class="alert-link">log in</a>'
     login_manager.login_message = f"Please, sign up before you enter the page, or {login_link} if you already have"
     login_manager.login_message_category = "error"
 
