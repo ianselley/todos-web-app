@@ -6,7 +6,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-### This website is available at: https://todos.ianselley.ml/sign-up
+### This website is available at: https://todos.ianselley.ml
 <!-- Whitespace -->
 &nbsp;
 
@@ -100,12 +100,12 @@ python main.py
 
 ## Accessing Website
 
-If you want to access the website from the same device where you just run the above commands you just have to go to http://localhost:5000/sign-up
+If you want to access the website from the same device where you just run the above commands you just have to go to http://localhost:5000
 and you are in the website. 
 
 But you can also access it from any other device that is in the same network as the device runnig the app, to do so
 you have to figure out what is [your local IP address](https://www.whatismybrowser.com/detect/what-is-my-local-ip-address). Once you know that,
-you can access it through: http://local-ip-here:5000/sign-up
+you can access it through: http://local-ip-here:5000
 
 <!-- TECH STACK -->
 
