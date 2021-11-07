@@ -140,11 +140,11 @@
             <div class="w-full flex justify-around">
                 <form id="submit-apply-changes-{{note.id}}" class="mt-6 w-1/3 "
                     onsubmit="return apply_changes('{{note.id}}', $('#content-{{note.id}}').val(), $('#change-category-{{note.id}}').val(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">
-                    <button id="apply-changes-{{note.id}}" class="btn-form w-full" type="submit">
+                    <button id="apply-changes-{{note.id}}" class="btn-form-green w-full" type="submit">
                         Apply
                     </button>
                 </form>
-                <button class="mt-6 w-1/3 btn-form" onclick="window.location.reload();">
+                <button class="mt-6 w-1/3 btn-form-green" onclick="window.location.reload();">
                     Cancel
                 </button>
             </div>

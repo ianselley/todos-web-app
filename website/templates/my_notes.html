@@ -12,7 +12,7 @@
         {% if category %}
         <form action="/post-note/{{category.id}}" method="POST">
             <input class="w-full" type="text" name="note_content" placeholder="Notes" autocomplete="off" autofocus>
-            <button class="mt-6 w-full btn-form" type="submit">Save</button>
+            <button class="mt-6 w-full btn-form-green" type="submit">Save</button>
         </form>
         {% endif %}
         {{ macros.notes(user, [category.id]) }}

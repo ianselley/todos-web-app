@@ -10,7 +10,7 @@
             <input class="w-full" type="text" name="category_name" placeholder="Categories" autocomplete="off"
                 autofocus>
             <button type="submit" onclick="fetch_reload('/post-category', $(this).prev().val())"
-                class="mt-6 w-full btn-form">Save</button>
+                class="mt-6 w-full btn-form-green">Save</button>
         </form>
         <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
             {% for category in user.categories %}
@@ -18,7 +18,8 @@
                 <div class="py-4 px-2.5 sm:p-4">
                     <div id="text-plus-logo-{{ category.id }}" class="flex items-center flex-nowrap content-center">
                         <div class="mr-0 sm:mr-3 flex flex-nowrap content-center">
-                            <button onclick="fetch_reload('/delete-category', '{{category.id}}');">
+                            <button onclick="$(this).next().toggleClass('show-modal')">
+
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
                                     viewBox="0 0 16 16">
                                     <path
@@ -27,10 +28,32 @@
                                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                 </svg>
                             </button>
+                            <div id="modal-container-{{category.id}}" onclick="window.location.reload();"
+                                class="hidden w-full h-screen pointer-events-none bg-black bg-opacity-20 max-h-screen">
+                                <div id="modal-{{category.id}}" onclick="event.stopPropagation();"
+                                    class="w-[auto] sm:w-1/2 max-h-screen h-[auto] bg-warmGray-50 sm:rounded-xl shadow-xl p-6 flex flex-col items-center justify-center">
+                                    <div>
+                                        Are you sure you want to delete the category "{{category.name}}" and all of its
+                                        notes?
+                                    </div>
+                                    <div class="w-full flex justify-around">
+                                        <form id="submit-apply-changes-{{category.id}}" class="mt-6 w-1/3"
+                                            onclick="fetch_reload('/delete-category', '{{category.id}}')">
+                                            <button id="apply-changes-{{category.id}}" class="btn-form-green w-full"
+                                                type="submit">
+                                                YES
+                                            </button>
+                                        </form>
+                                        <button class="mt-6 w-1/3 btn-form-red" onclick="window.location.reload();">
+                                            NO
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex justify-between w-full">
                             <div class="ml-3 grid grid-cols-auto-min">
-                                <span class="no-overflow w-min" id="category-name-{{category.id}}">
+                                <span class="no-overflow" id="category-name-{{category.id}}">
                                     {{ category.name }}
                                 </span>
                                 <a class="ml-3 flex items-center" href='/my-notes/{{ category.id }}'">
