@@ -32,9 +32,11 @@
                                 class="hidden w-full h-screen pointer-events-none bg-black bg-opacity-20 max-h-screen">
                                 <div id="modal-{{category.id}}" onclick="event.stopPropagation();"
                                     class="w-[auto] sm:w-1/2 max-h-screen h-[auto] bg-warmGray-50 sm:rounded-xl shadow-xl p-6 flex flex-col items-center justify-center">
-                                    <div>
-                                        Are you sure you want to delete the category "{{category.name}}" and all of its
-                                        notes?
+                                    <div class="text-center leading-loose">
+                                        Are you sure you want to <span class="font-semibold">DELETE</span> the category
+                                        <span class="font-semibold">{{category.name}}</span> and <span
+                                            class="font-semibold">all of its
+                                            notes</span>?
                                     </div>
                                     <div class="w-full flex justify-around">
                                         <form id="submit-apply-changes-{{category.id}}" class="mt-6 w-1/3"

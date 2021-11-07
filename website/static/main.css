@@ -1049,8 +1049,16 @@ video {
   font-weight: 100;
 }
 
+.font-semibold {
+  font-weight: 600;
+}
+
 .leading-tight {
   line-height: 1.25;
+}
+
+.leading-loose {
+  line-height: 2;
 }
 
 .text-gray-500 {

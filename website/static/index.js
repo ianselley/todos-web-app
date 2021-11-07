@@ -18,7 +18,7 @@ function fetch_reload(url, id) {
     method: "POST",
     body: JSON.stringify({ id: id }),
   }).then((_res) => {
-    window.location.reload();
+    location.reload(true);
   });
 }
 
@@ -66,7 +66,7 @@ let today = new Date().toLocaleDateString();
 
 document.querySelectorAll("[note-expires]").forEach((element) => {
   let element_date = element.getAttribute("note-expires");
-  if (element_date !== "None" && element.getAttribute("complete") == null) {
+  if (element_date != "None" && element.getAttribute("complete") == null) {
     let date = new Date(element_date).toLocaleDateString();
     if (today > date) {
       element.classList.add("note-expired");
