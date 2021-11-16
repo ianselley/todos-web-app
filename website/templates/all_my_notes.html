@@ -9,7 +9,7 @@
 <div class="flex justify-center">
     <div class="main-content">
         {% if user.notes %}
-        {{ macros.notes(user, category_id_list) }}
+        {{ macros.notes(user, category_id_list, true) }}
         {% else %}
         <div class="text-center">You don't have any notes to view.<br><br>
             <a href="/my-categories" class="link">

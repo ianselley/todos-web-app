@@ -1,4 +1,4 @@
-{% macro notes(user, category_id_list) %}
+{% macro notes(user, category_id_list, all) %}
 <ul class="divide-y divide-gray-400 divide-opacity-70 sm:divide-opacity-50">
     {% for important in [true, false] %}
 
@@ -8,33 +8,39 @@
     <li class="py-4 px-2.5 sm:p-4" id="li-{{note.id}}">
         <div class="flex items-center">
             <div class="mr-0 sm:mr-3 hidden sm:flex sm:flex-nowrap sm:content-center">
-                <button class="mr-1 sm:mr-2" onclick="fetch_reload('/check-note', '{{note.id}}');">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                        <path
-                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                        <path
-                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                    </svg>
-                </button>
-                <button onclick="fetch_reload('/delete-note', '{{note.id}}');">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                        <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </button>
+                <form class="flex-center" action="/check-note/{{note.id}}/{{all}}" method="POST">
+                    <button class="mr-1 sm:mr-2" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="green"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            <path
+                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                            <path
+                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                        </svg>
+                    </button>
+                </form>
+                <form class="flex-center" action="/delete-note/{{note.id}}/{{all}}" method="POST">
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="red"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </form>
             </div>
             <div class="sm:hidden">
-                <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="ml-2">
-                    <em
-                        class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
-                    </em>
-                </button>
+                <form class="flex-center" action="/toggle-important/{{note.id}}/{{all}}" method="POST">
+                    <button type="submit" class="ml-2">
+                        <em
+                            class="{% if important %} fas {% else %} far {% endif %}  fa-star text-amber-500 sm:text-yellow-400 fa-lg">
+                        </em>
+                    </button>
+                </form>
             </div>
             <div class="w-full flex justify-between relative">
                 <div class="ml-3 grid grid-cols-auto-min">
@@ -56,35 +62,39 @@
                         <ul mobile-options-menu
                             class="w-40 p-4 bg-white rounded space-y-3 hidden z-10 absolute top-1+1 -right-3">
                             <li>
-                                <button class="flex" onclick="fetch_reload('/check-note', '{{note.id}}');">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="green"
-                                        viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                        <path
-                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                        <path
-                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                    </svg>
-                                    <label class="ml-2">Check note</label>
-                                </button>
+                                <form class="flex-center" action="/check-note/{{note.id}}/{{all}}" method="POST">
+                                    <button class="flex" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                            fill="green" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                            <path
+                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                            <path
+                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                        </svg>
+                                        <label class="ml-2">Check note</label>
+                                    </button>
+                                </form>
                             </li>
                             <li>
-                                <button class="flex" onclick="fetch_reload('/delete-note', '{{note.id}}');">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="red"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                        <path
-                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                    <label class="ml-2">Delete note</label>
-                                </button>
+                                <form class="flex-center" action="/delete-note/{{note.id}}/{{all}}" method="POST">
+                                    <button class="flex" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="red"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                            <path
+                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                        <label class="ml-2">Delete note</label>
+                                    </button>
+                                </form>
                             </li>
                             <li>
                                 <button class="flex items-center"
-                                    onclick="show_modal('{{note.id}}',  $('#note-content-{{note.id}}').text().trim())">
-                                    <svg xmlns=" http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem"
+                                    onclick="show_modal('{{note.id}}', $('#note-content-{{note.id}}').text().trim())">
+                                    <svg xmlns=" http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                                         fill="currentColor" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
                                             d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
@@ -96,24 +106,27 @@
                     </div>
                     <button class="ml-3 hidden sm:flex sm:items-center"
                         onclick="show_modal('{{note.id}}', $('#note-content-{{note.id}}').text().trim())">
-                        <svg xmlns=" http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" fill="currentColor"
+                        <svg xmlns=" http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor"
                             viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z" />
                         </svg>
                     </button>
                 </div>
-                <button onclick="fetch_reload('/toggle-important', '{{note.id}}');" class="hidden sm:inline-block ml-2">
-                    <em
-                        class="{% if important %} fas {% else %} far {% endif %} fa-star text-amber-500 sm:text-yellow-400 fa-lg">
-                    </em>
-                </button>
+                <form class="flex-center" action="/toggle-important/{{note.id}}/{{all}}" method="POST">
+                    <button type="submit" class="hidden sm:inline-block ml-2">
+                        <em
+                            class="{% if important %} fas {% else %} far {% endif %} fa-star text-amber-500 sm:text-yellow-400 fa-lg">
+                        </em>
+                    </button>
+                </form>
             </div>
         </div>
     </li>
-    <div id="modal-container-{{note.id}}" onclick="window.location.reload();"
+    <div id="modal-container-{{note.id}}" onclick="location.reload(true);"
         class="hidden w-full h-screen pointer-events-none bg-black bg-opacity-20 max-h-screen">
-        <div id="modal-{{note.id}}" onclick="event.stopPropagation();"
+        <form action="/edit-note/{{note.id}}/{{all}}" method="POST" id="modal-{{note.id}}"
+            onclick="event.stopPropagation();"
             class="w-full sm:w-3/4 h-screen max-h-screen sm:h-[auto] bg-warmGray-50 sm:rounded-xl shadow-xl p-6 flex flex-col items-center justify-center">
             <label for="content-{{note.id}}">Edit note's content</label>
             <div class="wrap">
@@ -130,26 +143,24 @@
             <label for="note-details-{{note.id}}" class="mt-6">Add a note description:</label>
             <div class="wrap">
                 <div class="pull-tab"></div>
-                <textarea placeholder="Write here anything you want to add to your note"
-                    id="note-details-{{note.id}}">{% if note.details %}{{note.details}}{% endif %}</textarea>
+                <textarea placeholder="Write here anything you want to add to your note" id="note-details-{{note.id}}"
+                    name="note-details-{{note.id}}">{% if note.details %}{{note.details}}{% endif %}</textarea>
             </div>
             <label for="note-expires-{{note.id}}" class="mt-6 text-center">Enter an expiring date for this
                 note (Optional)
             </label>
-            <input id="note-expires-{{note.id}}" type="date" class="mt-2 w-48 min-h-[42px]"
-                value="{% if note.expires %}{{note.expires}}{% endif %}">
-            <div class="w-full flex justify-around">
-                <form id="submit-apply-changes-{{note.id}}" class="mt-6 w-1/3 "
-                    onsubmit="return apply_changes('{{note.id}}', $('#content-{{note.id}}').val(), $('#change-category-{{note.id}}').val(), $('#note-details-{{note.id}}').val(), $('#note-expires-{{note.id}}').val())">
-                    <button id="apply-changes-{{note.id}}" class="btn-form-green w-full" type="submit">
-                        Apply
-                    </button>
-                </form>
-                <button class="mt-6 w-1/3 btn-form-green" onclick="window.location.reload();">
+            <input id="note-expires-{{note.id}}" name="note-expires-{{note.id}}" type="date"
+                class="mt-2 w-48 min-h-[42px]" {% if note.expires %} value="{{note.expires}}" {% endif %}
+                placeholder="yyyy-mm-dd">
+            <div class="w-full pt-10 flex justify-around">
+                <button id="apply-changes-{{note.id}}" class="btn-form-green w-1/3" type="submit">
+                    Apply
+                </button>
+                <button class="w-1/3 btn-form-red" onclick="location.reload(true);">
                     Cancel
                 </button>
             </div>
-        </div>
+        </form>
     </div>
     {% endif %}
     {% endfor %}

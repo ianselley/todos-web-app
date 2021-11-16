@@ -20,6 +20,17 @@ def get(category_id):
     return render_template("404.html", user=current_user), 404
 
 
+@my_notes.route("/all-my-notes", methods=["GET"])
+@login_required
+def get_all():
+    category_list = Category.query.filter_by(user_id=current_user.id).all()
+    category_id_list = [category.id for category in category_list]
+    return render_template(
+        "all_my_notes.html", user=current_user, category_id_list=category_id_list
+    )
+
+
+
 @my_notes.route("/post-note/<category_id>", methods=["POST"])
 @login_required
 def post_note(category_id):
@@ -30,11 +41,9 @@ def post_note(category_id):
     return redirect(f"/my-notes/{category_id}")
 
 
-@my_notes.route("/check-note", methods=["POST"])
+@my_notes.route("/check-note/<note_id>/<all_>", methods=["POST"])
 @login_required
-def check_note():
-    data = json.loads(request.data)
-    note_id = data["id"]
+def check_note(note_id, all_):
     note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
@@ -45,14 +54,14 @@ def check_note():
         db.session.commit()
     else:
         flash("That note does not exist any more", category="error")
-    return jsonify({})
+    if all_ == "True":
+        return redirect(url_for(".get_all"))
+    return redirect(f"/my-notes/{category_id}")
 
 
-@my_notes.route("/delete-note", methods=["POST"])
+@my_notes.route("/delete-note/<note_id>/<all_>", methods=["POST"])
 @login_required
-def delete_note():
-    data = json.loads(request.data)
-    note_id = data["id"]
+def delete_note(note_id, all_):
     note = Note.query.filter_by(id=note_id).first()
     category_id = note.category_id
     if note:
@@ -62,23 +71,25 @@ def delete_note():
         else:
             db.session.delete(note)
             db.session.commit()
-    return jsonify({})
+    if all_ == "True":
+        return redirect(url_for(".get_all"))
+    return redirect(f"/my-notes/{category_id}")
 
 
-@my_notes.route("/edit-note", methods=["POST"])
+@my_notes.route("/edit-note/<note_id>/<all_>", methods=["POST"])
 @login_required
-def edit_note():
-    data = json.loads(request.data)
-    note_id = data["id"]
-    note_content = data["content"]
-    note_category_id = data["category_id"]
-    note_details = data["details"]
-    note_expires = data["expires"]
+def edit_note(note_id, all_):
+    data = request.form
+    note_content = data[f"content-{note_id}"]
+    note_category_id = data[f"change-category-{note_id}"]
+    note_details = data[f"note-details-{note_id}"]
+    note_expires = data[f"note-expires-{note_id}"]
     note = Note.query.filter_by(id=note_id).first()
+    category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
             flash(not_allowed, category="error")
-            return redirect(f"/my-notes/{note.category_id}")
+            return redirect(f"/my-notes/{category_id}")
         note.content = note_content
         note.category_id = note_category_id
         note.details = note_details
@@ -89,21 +100,24 @@ def edit_note():
         db.session.commit()
     else:
         flash("That note does not exist", category="error")
-    return jsonify({})
+    if all_ == "True":
+        return redirect(url_for(".get_all"))
+    return redirect(f"/my-notes/{category_id}")
 
 
-@my_notes.route("/toggle-important", methods=["POST"])
+@my_notes.route("/toggle-important/<note_id>/<all_>", methods=["POST"])
 @login_required
-def toggle_important():
-    data = json.loads(request.data)
-    note_id = data["id"]
+def toggle_important(note_id, all_):
     note = Note.query.filter_by(id=note_id).first()
+    category_id = note.category_id
     if note:
         if note.user_id != current_user.id:
             flash("You are not allowed to modify this note!", category="error")
-            return redirect(url_for("all_my_notes.get"))
+            return redirect(url_for(".get_all"))
         note.important = not note.important
         db.session.commit()
     else:
         flash("That note does not exist", category="error")
-    return jsonify({})
+    if all_ == "True":
+        return redirect(url_for(".get_all"))
+    return redirect(f"/my-notes/{category_id}")

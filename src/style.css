@@ -15,6 +15,7 @@ a {
 }
 
 textarea {
+  vertical-align: top;
   outline: none !important;
   @apply mt-2 py-2 px-3 min-h-[45px] h-[88px] max-h-40 w-full;
   @apply border-2 border-gray-300 focus:border-blue-300;
@@ -24,9 +25,8 @@ textarea {
 }
 
 .wrap {
-  @apply w-[290px] sm:w-3/4 max-w-[95vw];
+  @apply m-0 p-0 w-[290px] sm:w-3/4 max-w-[95vw];
   position: relative;
-  display: inline-block;
 }
 
 .pull-tab {
@@ -40,17 +40,10 @@ textarea {
   border-left: var(--border-width) solid transparent;
   border-radius: 6px 0;
   position: absolute;
-  bottom: 7px;
+  bottom: 0px;
   right: 0px;
   pointer-events: none;
   z-index: 2;
-}
-
-// This targets Firefox only
-@-moz-document url-prefix() {
-  .pull-tab {
-    bottom: 2px;
-  }
 }
 
 input::-ms-reveal,
@@ -151,15 +144,6 @@ input.form {
   @apply rounded-r-md;
 }
 
-// This targets Safari only
-@media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
-  @media {
-    .fa-eye .fa-eye-slash {
-      @apply -left-32;
-    }
-  }
-}
-
 form ~ ul {
   @apply pt-6;
 }
@@ -169,7 +153,6 @@ form ~ ul {
 }
 
 .expires-today {
-  /* -yellow-700 */
   @apply text-amber-600  text-opacity-90;
 }
 
