@@ -13,34 +13,10 @@ function toggle_nav_items() {
   $("#nav-items").toggleClass("hidden");
 }
 
-function fetch_reload(url, id) {
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify({ id: id }),
-  }).then((_res) => {
-    location.reload(true);
-  });
-}
-
 function show_modal(id, content) {
   $(`#modal-container-${id}`).toggleClass("show-modal");
   $(`#content-${id}`).focus();
   $(`#content-${id}`).val(content);
-}
-
-function apply_changes(id, content, category_id, details, expires) {
-  fetch("/edit-note", {
-    method: "POST",
-    body: JSON.stringify({
-      id: id,
-      content: content,
-      category_id: category_id,
-      details: details,
-      expires: expires,
-    }),
-  }).then((_res) => {
-    location.reload(true);
-  });
 }
 
 // Section to handle state of mobile menu options
@@ -108,19 +84,18 @@ let scrollpos = localStorage.getItem("scrollpos");
 let previousPath = localStorage.getItem("previousPath");
 let newPath = window.location.pathname;
 let alert = document.querySelector(".alert");
+let pathChange = previousPath !== newPath;
 
-if (scrollpos) {
+if (alert || pathChange) {
+  window.scrollTo(0, 0);
+} else if (scrollpos) {
   window.scrollTo(0, scrollpos);
 }
 
 window.addEventListener("beforeunload", function () {
   let before = window.location.pathname;
-  let top;
-  if (alert || previousPath !== newPath) {
-    top = 0;
-  } else {
-    top = window.pageYOffset || document.documentElement.scrollTop;
-  }
+  let top = window.pageYOffset || document.documentElement.scrollTop;
+
   localStorage.setItem("scrollpos", top);
   localStorage.setItem("previousPath", before);
 });

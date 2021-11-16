@@ -12,9 +12,11 @@ def page_not_found(e):
 
 
 def create_app():
+    from random import choice
+    from string import printable
     app = Flask(__name__)
     app.static_folder = "static"
-    app.config["SECRET_KEY"] = "ian"
+    app.config["SECRET_KEY"] = ''.join(choice(printable) for _ in range(20))
     app.register_error_handler(404, page_not_found)
     # To not show notifications every time main.py gets executed
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -31,13 +33,11 @@ def create_app():
 
     from .views import views
     from .auth import auth
-    from .all_my_notes import all_my_notes
     from .my_notes import my_notes
     from .my_categories import my_categories
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
-    app.register_blueprint(all_my_notes, url_prefix="/")
     app.register_blueprint(my_notes, url_prefix="/")
     app.register_blueprint(my_categories, url_prefix="/")
 
