@@ -4,7 +4,6 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 
-
 auth = Blueprint("auth", __name__)
 
 
@@ -31,11 +30,8 @@ def sign_up():
             db.session.commit()
             flash("Account created successfully", category="success")
 
-            if request.form.get("direct-login"):
-                login_user(new_user, remember=True)
-                return redirect(url_for("my_categories.get"))
-
-            return redirect(url_for("auth.login"))
+            login_user(new_user, remember=True)
+            return redirect(url_for("my_categories.get"))
 
     return render_template("sign_up.html", user=current_user)
 

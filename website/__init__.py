@@ -20,7 +20,6 @@ def create_app():
     app.register_error_handler(404, page_not_found)
     # To not show notifications every time main.py gets executed
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     db.init_app(app)
 
@@ -28,7 +27,7 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = "auth.sign_up"
     login_link = '<a href="/login" class="alert-link">log in</a>'
-    login_manager.login_message = f"Please, sign up before you enter the page, or {login_link} if you already have"
+    login_manager.login_message = f"Please, sign up before you enter the page, or {login_link} if you already have an account"
     login_manager.login_message_category = "error"
 
     from .views import views
